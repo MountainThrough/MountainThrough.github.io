@@ -4,6 +4,137 @@
   
   
   <entry>
+    <title>VSCode Reference</title>
+    <link href="/2025/03/05/reference/VSCode/"/>
+    <url>/2025/03/05/reference/VSCode/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Git操作"><a href="#Git操作" class="headerlink" title="Git操作"></a>Git操作</h1><p>更改撤销就是撤销到暂存更改里文件的状态，如果暂存区没有该文件，<br>就删除该文件</p><p>你提交过后，每一次提交就相当于更新暂存区</p><p>总的来说，暂存更改是一个仓库，commit也是也个仓库，最多可以有<br>两个仓库，优先级是commit仓库大于暂存仓库大于文件夹文件</p><h1 id="VSCode关于自动补全时Enter和Tab键的冲突问题"><a href="#VSCode关于自动补全时Enter和Tab键的冲突问题" class="headerlink" title="VSCode关于自动补全时Enter和Tab键的冲突问题"></a>VSCode关于自动补全时Enter和Tab键的冲突问题</h1><p>VSCode的自动补全方式确实感觉很逆天，我<strong>实现的效果</strong>就是<br><strong>默认按下Enter键不会进行补全,只有使用Tab选中的情况下<br>才会补全。Tab是用来上下移动补全代码的。</strong></p><p>下面具体讲怎么实现的</p><p>开启设置里面的Editor: Accept Suggestion On Enter，别的文章我看都不开启，哈哈</p><p><img src="/2025/03/05/reference/VSCode/image.png" alt="Editor: Accept Suggestion On Enter"></p><p>editor.suggest.selectionMode选择never，这样补全代码出现时默认就不会选中</p><p><img src="/2025/03/05/reference/VSCode/image-1.png" alt="editor.suggest.selectionMode"></p><p>如何选中就靠Tab键了，先把Tab选中关了，Editor: Tab Completion</p><p><img src="/2025/03/05/reference/VSCode/image-2.png" alt="Editor: Tab Completion"></p><p>然后再设置一下Tab的行为就行了，在keybindings.json里设置</p><p><img src="/2025/03/05/reference/VSCode/image-3.png" alt="keybindings.json"></p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tab&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;selectNextSuggestion&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;suggestWidgetVisible&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shift+tab&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;selectPrevSuggestion&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;suggestWidgetVisible&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure><p>ok了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Reference</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Reference</tag>
+      
+      <tag>git</tag>
+      
+      <tag>VSCode</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>20250301</title>
+    <link href="/2025/03/05/Todo/2025_3/3_1/"/>
+    <url>/2025/03/05/Todo/2025_3/3_1/</url>
+    
+    <content type="html"><![CDATA[<h5 id="2025年3月5日"><a href="#2025年3月5日" class="headerlink" title="2025年3月5日"></a>2025年3月5日</h5><ul><li><input checked disabled type="checkbox"> VSCode的Git操作</li><li><input checked disabled type="checkbox"> CMake配合VSCode使用</li></ul><p>找到个学习单词的网站，感觉还不错，充了一年的会员，就36，可能没啥时间完成任务了，现在是20点20分</p><h5 id="2025年3月7日"><a href="#2025年3月7日" class="headerlink" title="2025年3月7日"></a>2025年3月7日</h5><p>完成了3月5号的任务，确实没有玩，就是老是碰到一些问题需要解决，可能还是对VSCode不太熟悉。这两天学的也不少，就是没怎么碰C++，以后我做了那些事就叫做留痕吧。</p><h6 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h6><ul><li>VSCode免密登录ssh</li><li>解决了VSCode中Tab键和Enter键的冲突</li></ul><p>好像没啥了，哈哈</p><ul><li><input disabled type="checkbox"> 从github上找一段文字，然后找一些不会的单词记到单词本上</li><li><input disabled type="checkbox"> C++学习</li><li><input disabled type="checkbox"> CMake学习</li><li><input disabled type="checkbox"> 替换博客图片和文字</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Todo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Todo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Blog Reference</title>
+    <link href="/2025/03/05/reference/Blog/"/>
+    <url>/2025/03/05/reference/Blog/</url>
+    
+    <content type="html"><![CDATA[<h1 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h1><p>要设置挺多东西的</p><p>先安装几个插件，这个pdf插件你随便，就是用来把md文件转为pdf的</p><p><img src="/2025/03/05/reference/Blog/image-1.png" alt="插件列表"></p><p>我要搞得是那种每个文件对应一个图片文件夹的形式，所以折腾的久，别的我也不知道，<br>这是设置图片存储路径，不要瞎设置，别的很大概率有问题</p><p><img src="/2025/03/05/reference/Blog/image.png" alt="按照我的来"></p><p>npm安装插件</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">npm install https://github.com/CodeFalling/hexo-asset-image --save<br></code></pre></td></tr></table></figure><p>好像还要设置下面这几个东西，但是我不确定</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment">#_conofig.yml文件里</span><br><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span><br><span class="hljs-comment">#上面的这个设置有这个选项，只需要设置为true就行，下面的两个直接在底部添加</span><br><span class="hljs-attr">marked:</span><br>  <span class="hljs-attr">prependRoot:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">postAsset:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><p>然后正常执行hexo开启的操作就行了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Reference</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Blog</tag>
+      
+      <tag>Reference</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>test2</title>
+    <link href="/2025/03/05/tests/32/"/>
+    <url>/2025/03/05/tests/32/</url>
+    
+    <content type="html"><![CDATA[<h1 id="随便一个标题"><a href="#随便一个标题" class="headerlink" title="随便一个标题"></a>随便一个标题</h1><p><img src="/2025/03/05/tests/32/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-03-22%20221309.png" alt="测试"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>test</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>test</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>testfile</title>
+    <link href="/2025/03/05/1/"/>
+    <url>/2025/03/05/1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><p>图片测试：</p><p><img src="/2025/03/05/1/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-03-22%20222306.png" alt="测试图片1"></p><p><img src="https://avatars.githubusercontent.com/u/183251423?v=4" alt="测试图片2"></p><p>引用测试</p><blockquote><p>这是一条引用</p></blockquote><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><p>无序列表测试：</p><ul><li>哈哈</li><li>呵呵</li><li>燕姿</li></ul><h2 id="小二级"><a href="#小二级" class="headerlink" title="小二级"></a>小二级</h2><h3 id="三级"><a href="#三级" class="headerlink" title="三级"></a>三级</h3><h4 id="四级"><a href="#四级" class="headerlink" title="四级"></a>四级</h4><p>asdfhasdjfhk</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>test</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>test</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2025/03/04/hello-world/"/>
     <url>/2025/03/04/hello-world/</url>
