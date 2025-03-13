@@ -8,7 +8,7 @@
     <link href="/2025/03/10/Todo/2025_3/3_2/"/>
     <url>/2025/03/10/Todo/2025_3/3_2/</url>
     
-    <content type="html"><![CDATA[<h4 id="2025年3月10日"><a href="#2025年3月10日" class="headerlink" title="2025年3月10日"></a>2025年3月10日</h4><ul><li><input checked disabled type="checkbox"> v2代码理解</li><li><input checked disabled type="checkbox"> C++学习(就学了一点点)</li><li><input disabled type="checkbox"> 英语学习</li><li><input checked disabled type="checkbox"> 软件安全作业</li><li><input checked disabled type="checkbox"> 为什么不能用bind解决Mytask的传参问题</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;functional&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;x: &quot;</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">&quot;, y: &quot;</span> &lt;&lt; y &lt;&lt; std::endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">auto</span> boundFunc = std::<span class="hljs-built_in">bind</span>(func, std::placeholders::_1, <span class="hljs-number">10</span>);<br>    <span class="hljs-built_in">boundFunc</span>(<span class="hljs-number">5</span>); <span class="hljs-comment">// 输出: x: 5, y: 10</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>仔细看这段关于bind的使用，参数绑定的前提是函数有这个参数，如果数量不对编译不会通过</p><h6 id="之前的任务"><a href="#之前的任务" class="headerlink" title="之前的任务"></a>之前的任务</h6><ul><li><input checked disabled type="checkbox"> revactorV2在处理conned时不在ep范围内的处理感觉不对</li></ul><p>这个的解释是其实是在ep范围内的，只是加入的时当时没看到</p><ul><li><input checked disabled type="checkbox"> fd和tcp链接的键值对感觉没有必要</li></ul><p>如果你是想要在EventLoop类中执行关于读写数据的话确实没有必要，但是如果这样子的话那TcpConnection就没有存在的必要了，本来就是想要解耦，把执行数据处理，连接具体操作的工作交给TcpConnection</p><h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>今天干的活都比较琐碎，也不能讲没学，只能说学的不多不少，发现VSCode的终端可以直接建立一个窗口，我都搞不懂要xshell干嘛，哈哈。明天加油！</p><h4 id="2025年3月11日"><a href="#2025年3月11日" class="headerlink" title="2025年3月11日"></a>2025年3月11日</h4><ul><li><input checked disabled type="checkbox"> C++学习，争取把Reactor学完(没学完)</li><li><input disabled type="checkbox"> 英语学习</li></ul><h5 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h5><p>学了一点关于多线程调试代码</p><h4 id="2025年3月12日"><a href="#2025年3月12日" class="headerlink" title="2025年3月12日"></a>2025年3月12日</h4><ul><li><input disabled type="checkbox"> C++学习</li><li><input checked disabled type="checkbox"> 英语学习(以后就是英语文档看半个小时，单词复习半个小时)</li><li><input checked disabled type="checkbox"> 仔细过一下多线程代码调试</li><li><input checked disabled type="checkbox"> 了解一下关于竞赛方面的</li></ul>]]></content>
+    <content type="html"><![CDATA[<h4 id="2025年3月10日"><a href="#2025年3月10日" class="headerlink" title="2025年3月10日"></a>2025年3月10日</h4><ul><li><input checked disabled type="checkbox"> v2代码理解</li><li><input checked disabled type="checkbox"> C++学习(就学了一点点)</li><li><input disabled type="checkbox"> 英语学习</li><li><input checked disabled type="checkbox"> 软件安全作业</li><li><input checked disabled type="checkbox"> 为什么不能用bind解决Mytask的传参问题</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;functional&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;x: &quot;</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">&quot;, y: &quot;</span> &lt;&lt; y &lt;&lt; std::endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">auto</span> boundFunc = std::<span class="hljs-built_in">bind</span>(func, std::placeholders::_1, <span class="hljs-number">10</span>);<br>    <span class="hljs-built_in">boundFunc</span>(<span class="hljs-number">5</span>); <span class="hljs-comment">// 输出: x: 5, y: 10</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>仔细看这段关于bind的使用，参数绑定的前提是函数有这个参数，如果数量不对编译不会通过</p><h6 id="之前的任务"><a href="#之前的任务" class="headerlink" title="之前的任务"></a>之前的任务</h6><ul><li><input checked disabled type="checkbox"> revactorV2在处理conned时不在ep范围内的处理感觉不对</li></ul><p>这个的解释是其实是在ep范围内的，只是加入的时当时没看到</p><ul><li><input checked disabled type="checkbox"> fd和tcp链接的键值对感觉没有必要</li></ul><p>如果你是想要在EventLoop类中执行关于读写数据的话确实没有必要，但是如果这样子的话那TcpConnection就没有存在的必要了，本来就是想要解耦，把执行数据处理，连接具体操作的工作交给TcpConnection</p><h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>今天干的活都比较琐碎，也不能讲没学，只能说学的不多不少，发现VSCode的终端可以直接建立一个窗口，我都搞不懂要xshell干嘛，哈哈。明天加油！</p><h4 id="2025年3月11日"><a href="#2025年3月11日" class="headerlink" title="2025年3月11日"></a>2025年3月11日</h4><ul><li><input checked disabled type="checkbox"> C++学习，争取把Reactor学完(没学完)</li><li><input disabled type="checkbox"> 英语学习</li></ul><h5 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h5><p>学了一点关于多线程调试代码</p><h4 id="2025年3月12日"><a href="#2025年3月12日" class="headerlink" title="2025年3月12日"></a>2025年3月12日</h4><ul><li><input checked disabled type="checkbox"> C++学习</li><li><input checked disabled type="checkbox"> 英语学习(以后就是英语文档看半个小时，单词复习半个小时)</li><li><input checked disabled type="checkbox"> 仔细过一下多线程代码调试</li><li><input checked disabled type="checkbox"> 了解一下关于竞赛方面的</li></ul><h4 id="2025年3月13日"><a href="#2025年3月13日" class="headerlink" title="2025年3月13日"></a>2025年3月13日</h4><ul><li><input checked disabled type="checkbox"> C++学习</li><li><input checked disabled type="checkbox"> 英语学习</li><li><input checked disabled type="checkbox"> 软件安全作业</li></ul><h4 id="2025年3月15日"><a href="#2025年3月15日" class="headerlink" title="2025年3月15日"></a>2025年3月15日</h4><ul><li><input disabled type="checkbox"> 线程池工作原理详细分析</li></ul><h4 id="2025年3月16日"><a href="#2025年3月16日" class="headerlink" title="2025年3月16日"></a>2025年3月16日</h4><ul><li><input disabled type="checkbox"> 线程池工作原理详细分析</li></ul>]]></content>
     
     
     <categories>
@@ -45,11 +45,11 @@
     
     <tags>
       
+      <tag>Reference</tag>
+      
       <tag>git</tag>
       
       <tag>VSCode</tag>
-      
-      <tag>Reference</tag>
       
     </tags>
     
@@ -99,9 +99,9 @@
     
     <tags>
       
-      <tag>Reference</tag>
-      
       <tag>Blog</tag>
+      
+      <tag>Reference</tag>
       
     </tags>
     
@@ -110,11 +110,11 @@
   
   
   <entry>
-    <title>testfile</title>
-    <link href="/2025/03/05/1/"/>
-    <url>/2025/03/05/1/</url>
+    <title>test2</title>
+    <link href="/2025/03/05/tests/32/"/>
+    <url>/2025/03/05/tests/32/</url>
     
-    <content type="html"><![CDATA[<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><p>图片测试：</p><p><img src="/2025/03/05/1/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-03-22%20222306.png" alt="测试图片1"></p><p><img src="https://avatars.githubusercontent.com/u/183251423?v=4" alt="测试图片2"></p><p>引用测试</p><blockquote><p>这是一条引用</p></blockquote><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><p>无序列表测试：</p><ul><li>哈哈</li><li>呵呵</li><li>燕姿</li></ul><h2 id="小二级"><a href="#小二级" class="headerlink" title="小二级"></a>小二级</h2><h3 id="三级"><a href="#三级" class="headerlink" title="三级"></a>三级</h3><h4 id="四级"><a href="#四级" class="headerlink" title="四级"></a>四级</h4><p>asdfhasdjfhk</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="随便一个标题"><a href="#随便一个标题" class="headerlink" title="随便一个标题"></a>随便一个标题</h1><p><img src="/2025/03/05/tests/32/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-03-22%20221309.png" alt="测试"></p>]]></content>
     
     
     <categories>
@@ -135,11 +135,11 @@
   
   
   <entry>
-    <title>test2</title>
-    <link href="/2025/03/05/tests/32/"/>
-    <url>/2025/03/05/tests/32/</url>
+    <title>testfile</title>
+    <link href="/2025/03/05/1/"/>
+    <url>/2025/03/05/1/</url>
     
-    <content type="html"><![CDATA[<h1 id="随便一个标题"><a href="#随便一个标题" class="headerlink" title="随便一个标题"></a>随便一个标题</h1><p><img src="/2025/03/05/tests/32/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-03-22%20221309.png" alt="测试"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><p>图片测试：</p><p><img src="/2025/03/05/1/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-03-22%20222306.png" alt="测试图片1"></p><p><img src="https://avatars.githubusercontent.com/u/183251423?v=4" alt="测试图片2"></p><p>引用测试</p><blockquote><p>这是一条引用</p></blockquote><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><p>无序列表测试：</p><ul><li>哈哈</li><li>呵呵</li><li>燕姿</li></ul><h2 id="小二级"><a href="#小二级" class="headerlink" title="小二级"></a>小二级</h2><h3 id="三级"><a href="#三级" class="headerlink" title="三级"></a>三级</h3><h4 id="四级"><a href="#四级" class="headerlink" title="四级"></a>四级</h4><p>asdfhasdjfhk</p>]]></content>
     
     
     <categories>
