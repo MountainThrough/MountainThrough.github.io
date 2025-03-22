@@ -19,34 +19,26 @@
   <meta name="author" content="Through Mountain">
   <meta name="keywords" content="">
   
-    <meta name="description" content="快捷键ctrl+g输入行号跳转alt+左回退alt+右前进 Git操作更改撤销就是撤销到暂存更改里文件的状态，如果暂存区没有该文件，就删除该文件 你提交过后，每一次提交就相当于更新暂存区 总的来说，暂存更改是一个仓库，commit也是也个仓库，最多可以有两个仓库，优先级是commit仓库大于暂存仓库大于文件夹文件 VSCode关于自动补全时Enter换行和选中的冲突问题VSCode的自动补全方式确">
+    <meta name="description" content="Transaction IsolationSerializable：  共享锁（Shared Lock, S）：允许多个事务同时读取数据，但不允许修改。 排他锁（Exclusive Lock, X）：只允许一个事务对数据进行读取和修改，其他事务不能读取或修改。  一个死锁错误背后的原理：背景：  先是右边查询表，然后左边查询表，左边更新数据，左边陷入等待，右边更新数据，右边报错，左边此时正常执行，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VSCode Reference">
-<meta property="og:url" content="https://mountainthrough.github.io/2025/03/05/reference/VSCode/index.html">
+<meta property="og:title" content="Mysql Note">
+<meta property="og:url" content="https://mountainthrough.github.io/2025/03/21/Note/Hire/Mysql/index.html">
 <meta property="og:site_name" content="越过山丘">
-<meta property="og:description" content="快捷键ctrl+g输入行号跳转alt+左回退alt+右前进 Git操作更改撤销就是撤销到暂存更改里文件的状态，如果暂存区没有该文件，就删除该文件 你提交过后，每一次提交就相当于更新暂存区 总的来说，暂存更改是一个仓库，commit也是也个仓库，最多可以有两个仓库，优先级是commit仓库大于暂存仓库大于文件夹文件 VSCode关于自动补全时Enter换行和选中的冲突问题VSCode的自动补全方式确">
+<meta property="og:description" content="Transaction IsolationSerializable：  共享锁（Shared Lock, S）：允许多个事务同时读取数据，但不允许修改。 排他锁（Exclusive Lock, X）：只允许一个事务对数据进行读取和修改，其他事务不能读取或修改。  一个死锁错误背后的原理：背景：  先是右边查询表，然后左边查询表，左边更新数据，左边陷入等待，右边更新数据，右边报错，左边此时正常执行，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mountainthrough.github.io/2025/03/05/reference/VSCode/image.png">
-<meta property="og:image" content="https://mountainthrough.github.io/2025/03/05/reference/VSCode/image-1.png">
-<meta property="og:image" content="https://mountainthrough.github.io/2025/03/05/reference/VSCode/image-2.png">
-<meta property="og:image" content="https://mountainthrough.github.io/2025/03/05/reference/VSCode/image-3.png">
-<meta property="og:image" content="https://mountainthrough.github.io/2025/03/05/reference/VSCode/image-5.png">
-<meta property="og:image" content="https://mountainthrough.github.io/2025/03/05/reference/VSCode/image-4.png">
-<meta property="og:image" content="https://mountainthrough.github.io/2025/03/05/reference/VSCode/image-6.png">
-<meta property="article:published_time" content="2025-03-05T12:51:32.000Z">
-<meta property="article:modified_time" content="2025-03-21T09:29:32.998Z">
+<meta property="og:image" content="https://mountainthrough.github.io/2025/03/21/Note/Hire/Mysql/image.png">
+<meta property="article:published_time" content="2025-03-21T14:00:20.000Z">
+<meta property="article:modified_time" content="2025-03-21T14:08:28.311Z">
 <meta property="article:author" content="Through Mountain">
-<meta property="article:tag" content="git">
-<meta property="article:tag" content="VSCode">
-<meta property="article:tag" content="Reference">
+<meta property="article:tag" content="Mysql">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://mountainthrough.github.io/2025/03/05/reference/VSCode/image.png">
+<meta name="twitter:image" content="https://mountainthrough.github.io/2025/03/21/Note/Hire/Mysql/image.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>VSCode Reference - 越过山丘</title>
+  <title>Mysql Note - 越过山丘</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="VSCode Reference"></span>
+            <span id="subtitle" data-typed-text="Mysql Note"></span>
           
         </div>
 
@@ -223,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-05 20:51" pubdate>
-          2025年3月5日 晚上
+        <time datetime="2025-03-21 22:00" pubdate>
+          2025年3月21日 晚上
         </time>
       </span>
     
@@ -235,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          792 字
+          190 字
         
       </span>
     
@@ -246,7 +238,7 @@
         
         
         
-          7 分钟
+          2 分钟
         
       </span>
     
@@ -283,48 +275,22 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">VSCode Reference</h1>
+            <h1 id="seo-header">Mysql Note</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><p>ctrl+g输入行号跳转<br>alt+左回退<br>alt+右前进</p>
-<h1 id="Git操作"><a href="#Git操作" class="headerlink" title="Git操作"></a>Git操作</h1><p>更改撤销就是撤销到暂存更改里文件的状态，如果暂存区没有该文件，<br>就删除该文件</p>
-<p>你提交过后，每一次提交就相当于更新暂存区</p>
-<p>总的来说，暂存更改是一个仓库，commit也是也个仓库，最多可以有<br>两个仓库，优先级是commit仓库大于暂存仓库大于文件夹文件</p>
-<h1 id="VSCode关于自动补全时Enter换行和选中的冲突问题"><a href="#VSCode关于自动补全时Enter换行和选中的冲突问题" class="headerlink" title="VSCode关于自动补全时Enter换行和选中的冲突问题"></a>VSCode关于自动补全时Enter换行和选中的冲突问题</h1><p>VSCode的自动补全方式确实感觉很逆天，我<strong>实现的效果</strong>就是<br><strong>出现代码提示时按下Enter键不会进行补全而是会换行,只有使用Tab选中的情况下才会补全。Tab是用来上下移动选中补全代码的。</strong></p>
-<p>下面具体讲怎么实现的</p>
-<p>开启设置里面的Editor: Accept Suggestion On Enter，别的文章我看都不开启，哈哈</p>
-<p><img src="/2025/03/05/reference/VSCode/image.png" srcset="/img/loading.gif" lazyload alt="Editor: Accept Suggestion On Enter"></p>
-<p>editor.suggest.selectionMode选择never，这样补全代码出现时默认就不会选中</p>
-<p><img src="/2025/03/05/reference/VSCode/image-1.png" srcset="/img/loading.gif" lazyload alt="editor.suggest.selectionMode"></p>
-<p>如何选中就靠Tab键了，先把Tab选中关了，Editor: Tab Completion</p>
-<p><img src="/2025/03/05/reference/VSCode/image-2.png" srcset="/img/loading.gif" lazyload alt="Editor: Tab Completion"></p>
-<p>然后再设置一下Tab的行为就行了，在keybindings.json里设置</p>
-<p><img src="/2025/03/05/reference/VSCode/image-3.png" srcset="/img/loading.gif" lazyload alt="keybindings.json"></p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tab&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;selectNextSuggestion&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;suggestWidgetVisible&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shift+tab&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;selectPrevSuggestion&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;suggestWidgetVisible&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
-
-<p>ok了。</p>
-<h1 id="VSCode解决git的SSH和Windows与Ubuntu的ssh冲突"><a href="#VSCode解决git的SSH和Windows与Ubuntu的ssh冲突" class="headerlink" title="VSCode解决git的SSH和Windows与Ubuntu的ssh冲突"></a>VSCode解决git的SSH和Windows与Ubuntu的ssh冲突</h1><p>因为本地git要和github做一条ssh连接认证，我本地VSCode又要和虚拟机进行ssh连接，所以两者默认会有冲突</p>
-<p>我的解决方法就是在ssh配置文件中改变ubuntu的ssh默认连接文件</p>
-<p>我默认你git连接是对的，要是不对，就先把这个目录删除，C:\Users\用户名.ssh，然后优先配置git的ssh连接，然后再跟我搞虚拟机。</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">ssh-keygen -t rsa -f C:\Users\YourUsername\.ssh\id_rsa_ubuntu<br>#这是windows命令框<br></code></pre></td></tr></table></figure>
-<p>写了一半发现好简单，上面的这些都是跟正常的差不多，只要你生成的文件不是默认的id_rsa，再在config文件里加上下面的这些配置就行了</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">Host Ubuntu<br>    HostName 192.168.40.137<br>    Port 22<br>    User test<br>    IdentityFile C:\Users\用户名\.ssh\id_rsa_ubuntu<br></code></pre></td></tr></table></figure>
-
-<h1 id="VSCode多线程调试-C-C-程序"><a href="#VSCode多线程调试-C-C-程序" class="headerlink" title="VSCode多线程调试(C&#x2F;C++程序)"></a>VSCode多线程调试(C&#x2F;C++程序)</h1><p>我的环境：windowsVSCode远程ssh连接Ubuntu虚拟机，CMakeTools配置设为<strong>GCC</strong></p>
-<p><img src="/2025/03/05/reference/VSCode/image-5.png" srcset="/img/loading.gif" lazyload alt="CMakeTools配置gcc"></p>
-<p><strong>实现的效果类似于只执行当前线程，其他线程暂时不运行</strong></p>
-<p>多线程调试命令：</p>
-<p>需要在调试控制台的命令行中执行</p>
-<p><img src="/2025/03/05/reference/VSCode/image-4.png" srcset="/img/loading.gif" lazyload alt="多线程调试命令"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">-<span class="hljs-built_in">exec</span> info threads<br><span class="hljs-comment">#展示当前所有线程</span><br>-<span class="hljs-built_in">exec</span> thread 1<br><span class="hljs-comment">#切换至线程1</span><br>-<span class="hljs-built_in">exec</span> thread 2<br><span class="hljs-comment">#切换至线程2</span><br>-<span class="hljs-built_in">exec</span> <span class="hljs-built_in">set</span> scheduler-locking on<br><span class="hljs-comment">#锁定当前线程</span><br>-<span class="hljs-built_in">exec</span> <span class="hljs-built_in">set</span> scheduler-locking off<br><span class="hljs-comment">#取消锁定当前线程</span><br></code></pre></td></tr></table></figure>
-
-<p>图中线程id就是1和2，当前线程id为1，切换至线程2，然后锁定当前线程(线程2)，线程1就暂时不运行了，就可以单独调试线程2，调试代码片段完成后，解除锁定线程2，线程1和线程2就能正常运行，不会对其造成影响</p>
-<p><img src="/2025/03/05/reference/VSCode/image-6.png" srcset="/img/loading.gif" lazyload alt="调试截图"></p>
-<p>最近又看到两个博客，都是关于gdb调试的，VSCode中调试窗口命令行的功能其实也就是运行gdb命令</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42158742/article/details/113100151">GDB多线程调试</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42158742/article/details/113100063">GDB多进程调试</a></p>
+                <h1 id="Transaction-Isolation"><a href="#Transaction-Isolation" class="headerlink" title="Transaction Isolation"></a>Transaction Isolation</h1><p>Serializable：</p>
+<ul>
+<li>共享锁（Shared Lock, S）：允许多个事务同时读取数据，但不允许修改。</li>
+<li>排他锁（Exclusive Lock, X）：只允许一个事务对数据进行读取和修改，其他事务不能读取或修改。</li>
+</ul>
+<p>一个死锁错误背后的原理：<br>背景：</p>
+<ul>
+<li>先是右边查询表，然后左边查询表，左边更新数据，左边陷入等待，右边更新数据，右边报错，左边此时正常执行，隔离级别都是串行化。</li>
+</ul>
+<p><img src="/2025/03/21/Note/Hire/Mysql/image.png" srcset="/img/loading.gif" lazyload alt="可串行化的死锁错误"></p>
+<p>先是两边都加上了s锁，左边想要修改数据，没有权限等待，等待右边退出才能安装排他锁，结果右边也要上排他锁，等待左边退出，直接死锁，右边挂了，左边就执行了。</p>
 
                 
               </div>
@@ -343,7 +309,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Reference/" class="category-chain-item">Reference</a>
+  <a href="/categories/Note/" class="category-chain-item">Note</a>
   
   
 
@@ -358,11 +324,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/git/" class="print-no-link">#git</a>
-      
-        <a href="/tags/VSCode/" class="print-no-link">#VSCode</a>
-      
-        <a href="/tags/Reference/" class="print-no-link">#Reference</a>
+        <a href="/tags/Mysql/" class="print-no-link">#Mysql</a>
       
     </div>
   
@@ -374,8 +336,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>VSCode Reference</div>
-      <div>https://mountainthrough.github.io/2025/03/05/reference/VSCode/</div>
+      <div>Mysql Note</div>
+      <div>https://mountainthrough.github.io/2025/03/21/Note/Hire/Mysql/</div>
     </div>
     <div class="license-meta">
       
@@ -387,7 +349,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年3月5日</div>
+          <div>2025年3月21日</div>
         </div>
       
       
@@ -419,18 +381,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/10/Todo/2025_3/3_2/" title="20250302">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">20250302</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/05/Todo/2025_3/3_1/" title="20250301">
-                        <span class="hidden-mobile">20250301</span>
+                      <a href="/2025/03/20/Note/C++/pointer/" title="Pointer Note">
+                        <span class="hidden-mobile">Pointer Note</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
