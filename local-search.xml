@@ -83,7 +83,7 @@
     <link href="/2025/03/20/Note/C++/pointer/"/>
     <url>/2025/03/20/Note/C++/pointer/</url>
     
-    <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> ** p;<br><span class="hljs-type">int</span> * p1;<br></code></pre></td></tr></table></figure><p>int <em>可以看成是多个int的数组，因为存储的是int；<br>char ** 可以看成是存储多个char</em>的数组</p>]]></content>
+    <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> ** p;<br><span class="hljs-type">int</span> * p1;<br></code></pre></td></tr></table></figure><p>int *可以看成是多个int的数组，因为存储的是int；<br>char ** 可以看成是存储多个char*的数组</p>]]></content>
     
     
     <categories>
