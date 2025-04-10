@@ -4,11 +4,94 @@
   
   
   <entry>
+    <title>Linux</title>
+    <link href="/2025/04/10/reference/Linux/"/>
+    <url>/2025/04/10/reference/Linux/</url>
+    
+    <content type="html"><![CDATA[<p>#Commands<br>Calclulate Disk Size<br><code>du -sh Dictsname</code></p><table><thead><tr><th align="center">Commands</th><th align="center">Comments</th></tr></thead><tbody><tr><td align="center"><code>du</code></td><td align="center">Disk Usage</td></tr><tr><td align="center">h</td><td align="center">human</td></tr><tr><td align="center">s</td><td align="center">summary</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>Reference</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Reference</tag>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Git</title>
+    <link href="/2025/04/10/reference/Git/"/>
+    <url>/2025/04/10/reference/Git/</url>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th align="center">Commands</th><th align="center">Function</th></tr></thead><tbody><tr><td align="center"><code>git ls-remote https://github.com/MountainThrough/1.git</code></td><td align="center">Cheack whether your local Git is connected to the remote</td></tr><tr><td align="center"><code>git config -l</code></td><td align="center">Check Local Git config</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>Reference</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>git</tag>
+      
+      <tag>Reference</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++错误处理机制</title>
+    <link href="/2025/04/08/Note/C++/Trycatch/"/>
+    <url>/2025/04/08/Note/C++/Trycatch/</url>
+    
+    <content type="html"><![CDATA[<ul><li>throw类似于return，调用后，后面的代码不会执行，所以要考虑内存安全</li><li>如果throw了错误之后，当前函数没有catch，错误会跳转到上层函数，直到main函数，如果还没有程序就终止</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>Note</tag>
+      
+      <tag>TryCatch</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>20250401</title>
     <link href="/2025/04/04/Todo/2025_4/4_1/"/>
     <url>/2025/04/04/Todo/2025_4/4_1/</url>
     
-    <content type="html"><![CDATA[<h1 id="2025年4月4日"><a href="#2025年4月4日" class="headerlink" title="2025年4月4日"></a>2025年4月4日</h1><h2 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h2><p>好久没写博客了，这几天还是在赶代码，也没啥好说的，就每天想业务逻辑什么的，也学到了一些知识，就是英语落下了，好几天没学了，有时候代码错误搞得没时间管这那，也没啥任务，就是想起来博客了，然后网盘也做好了底子，清明这几天放放假，也挺好</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="2025年4月4日"><a href="#2025年4月4日" class="headerlink" title="2025年4月4日"></a>2025年4月4日</h1><h2 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h2><p>好久没写博客了，这几天还是在赶代码，也没啥好说的，就每天想业务逻辑什么的，也学到了一些知识，就是英语落下了，好几天没学了，有时候代码错误搞得没时间管这那，也没啥任务，就是想起来博客了，然后网盘也做好了底子，清明这几天放放假，也挺好</p><h1 id="2025年4月5日"><a href="#2025年4月5日" class="headerlink" title="2025年4月5日"></a>2025年4月5日</h1><ul><li><input disabled type="checkbox"> 网络安全实验：截止日期4&#x2F;14</li><li><input checked disabled type="checkbox"> 逆向工程实验：截止日期4&#x2F;7</li><li><input checked disabled type="checkbox"> 系统安全实验，截止日期老师没讲，大概也在4月7日左右</li><li><input disabled type="checkbox"> 软件安全实验，截止日期4&#x2F;8</li></ul><h1 id="2025年4月7日"><a href="#2025年4月7日" class="headerlink" title="2025年4月7日"></a>2025年4月7日</h1><ul><li><input disabled type="checkbox"> 文件传输适配</li><li><input checked disabled type="checkbox"> 文件hash适配</li><li><input disabled type="checkbox"> 用户登录</li><li><input disabled type="checkbox"> 用户注册</li><li><input disabled type="checkbox"> 密码验证</li></ul>]]></content>
     
     
     <categories>
@@ -96,6 +179,8 @@
     <tags>
       
       <tag>Pointer</tag>
+      
+      <tag>C++</tag>
       
       <tag>Note</tag>
       
