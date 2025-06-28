@@ -231,6 +231,260 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2025/04/08/Note/C++/Trycatch/" target="_self">
+          C++错误处理机制
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/08/Note/C++/Trycatch/" target="_self">
+        <div>
+          throw类似于return，调用后，后面的代码不会执行，所以要考虑内存安全 如果throw了错误之后，当前函数没有catch，错误会跳转到上层函数，直到main函数，如果还没有程序就终止
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-04-08 14:25" pubdate>
+              2025-04-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Note/" class="category-chain-item">Note</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">#C++</a>
+            
+              <a href="/tags/Note/">#Note</a>
+            
+              <a href="/tags/TryCatch/">#TryCatch</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/03/21/Note/Hire/Mysql/" target="_self">
+          Mysql Note
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/03/21/Note/Hire/Mysql/" target="_self">
+        <div>
+          事务隔离Serializable：  共享锁（Shared Lock, S）：允许多个事务同时读取数据，但不允许修改。 排他锁（Exclusive Lock, X）：只允许一个事务对数据进行读取和修改，其他事务不能读取或修改。  一个死锁错误背后的原理：背景：  先是右边查询表，然后左边查询表，左边更新数据，左边陷入等待，右边更新数据，右边报错，左边此时正常执行，隔离级别都是串行化。   先是两边
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-03-21 22:00" pubdate>
+              2025-03-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Note/" class="category-chain-item">Note</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mysql/">#Mysql</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/03/20/Note/C++/pointer/" target="_self">
+          Pointer Note
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/03/20/Note/C++/pointer/" target="_self">
+        <div>
+          12char ** p;int * p1; int *可以看成是多个int的数组，因为存储的是int；char ** 可以看成是存储多个char*的数组
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-03-20 09:13" pubdate>
+              2025-03-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Note/" class="category-chain-item">Note</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">#C++</a>
+            
+              <a href="/tags/Note/">#Note</a>
+            
+              <a href="/tags/Pointer/">#Pointer</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/03/15/Note/Net/HTTP/" target="_self">
+          HTTP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/03/15/Note/Net/HTTP/" target="_self">
+        <div>
+          HTTP特点 C&#x2F;S模型：一次请求必定对应一次访问 文本协议：传输的都是字符串，可见即所得 无状态：每一个HTTP请求都是独立的，不依赖于上下文 可靠：基于TCP连接无状态解释：相比于TCP有状态，TCP需要什么建立连接，断开连接，TIME-WAIT状态，HTTP不需要，也没有。  提升服务器性能 垂直扩展：提升服务器硬件设备性能，提升性能有限 水平扩展：增加服务器(推荐) 有状态不支持
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-03-15 20:22" pubdate>
+              2025-03-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Note/" class="category-chain-item">Note</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Note/">#Note</a>
+            
+              <a href="/tags/HTTP/">#HTTP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2025/03/14/Note/Hire/Redis/" target="_self">
           Redis
         </a>
@@ -239,7 +493,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/03/14/Note/Hire/Redis/" target="_self">
         <div>
-          缓存雪崩，击穿，穿透的区别雪崩 12345定义：大量热点数据在同一时间段失效解决方法：分散这些数据的失效时间延长热点数据的失效时间  击穿 123456定义：热点数据失效(与雪崩区别在于不关注失效时间)解决方法：延长热点数据的失效时间当访问底层数据库使其互斥访问，mysql需要自己设置锁来保持线程安全，因为它是多线程的，redis单线程  穿透 1234定义：缓存和底层数据库都没有该数据危害：增加
+          Redis为什么快所有数据存储在内存，相较于磁盘读写，速度更快 Redis是个键值存储系统，相较于mysql没有复杂的查询语法，操作更简单所以更快 Redis使用自定义的文本协议 Redis使用IO多路复用技术 除了一些耗时较长的操作都是由主线程串行执行，减少了线程切换的开销 例如持久化，I&#x2F;O读写，删除大对象 现在的 redis 还是单线程吗主线程负责短命令 子线程负责长命令 除了一些
         </div>
       </a>
 
@@ -281,67 +535,6 @@
               <a href="/tags/Note/">#Note</a>
             
               <a href="/tags/Redis/">#Redis</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/03/10/Todo/2025_3/3_2/" target="_self">
-          20250302
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/03/10/Todo/2025_3/3_2/" target="_self">
-        <div>
-          2025年3月10日  v2代码理解  C++学习(就学了一点点)  英语学习  软件安全作业  为什么不能用bind解决Mytask的传参问题  12345678910#include &lt;iostream&gt;#include &lt;functional&gt;void func(int x, int y) &#123;    std::cout &lt;&lt; &quot;x: &
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-10 08:52" pubdate>
-              2025-03-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Todo/" class="category-chain-item">Todo</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Todo/">#Todo</a>
             
           </div>
         
@@ -402,72 +595,11 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
+              <a href="/tags/Reference/">#Reference</a>
+            
               <a href="/tags/git/">#git</a>
             
               <a href="/tags/VSCode/">#VSCode</a>
-            
-              <a href="/tags/Reference/">#Reference</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/03/05/Todo/2025_3/3_1/" target="_self">
-          20250301
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/03/05/Todo/2025_3/3_1/" target="_self">
-        <div>
-          2025年3月5日  VSCode的Git操作  CMake配合VSCode使用  找到个学习单词的网站，感觉还不错，充了一年的会员，就36，可能没啥时间完成任务了，现在是20点20分 2025年3月7日完成了3月5号的任务，确实没有玩，就是老是碰到一些问题需要解决，可能还是对VSCode不太熟悉。这两天学的也不少，就是没怎么碰C++，以后我做了那些事就叫做留痕吧。 留痕 VSCode免密登录ss
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-05 17:06" pubdate>
-              2025-03-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Todo/" class="category-chain-item">Todo</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Todo/">#Todo</a>
             
           </div>
         

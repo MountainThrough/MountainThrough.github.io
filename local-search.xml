@@ -4,11 +4,217 @@
   
   
   <entry>
+    <title>Project Note</title>
+    <link href="/2025/06/28/Note/Hire/Project/"/>
+    <url>/2025/06/28/Note/Hire/Project/</url>
+    
+    <content type="html"><![CDATA[<h1 id="有对项目进行压测吗"><a href="#有对项目进行压测吗" class="headerlink" title="有对项目进行压测吗"></a>有对项目进行压测吗</h1><p>使用过apache进行过压力测试，qps4500左右，虚拟机里进行的，电脑性能也一般，可能对结果有一定影响，压力测试本身也消耗虚拟机资源</p><h1 id="用consul做了什么，怎么实现的？"><a href="#用consul做了什么，怎么实现的？" class="headerlink" title="用consul做了什么，怎么实现的？"></a>用consul做了什么，怎么实现的？</h1><p>做了个服务发现，搭建容器consul集群，向consul注册函数，然后返回服务地址和端口</p><h2 id="服务发现用的什么协议-consul服务器和程序如何通信？tcp协议"><a href="#服务发现用的什么协议-consul服务器和程序如何通信？tcp协议" class="headerlink" title="服务发现用的什么协议&#x2F;consul服务器和程序如何通信？tcp协议"></a>服务发现用的什么协议&#x2F;consul服务器和程序如何通信？tcp协议</h2><p>使用的是rpc协议</p><h2 id="consul集群作用"><a href="#consul集群作用" class="headerlink" title="consul集群作用"></a>consul集群作用</h2><p>保持数据一致性，增强服务器容灾，一台机器崩溃其他的数据还能运行</p><h1 id="rabbitMQ如何保证消息的不丢失"><a href="#rabbitMQ如何保证消息的不丢失" class="headerlink" title="rabbitMQ如何保证消息的不丢失"></a>rabbitMQ如何保证消息的不丢失</h1><p>Confirm</p><p>手动开启</p><p>mq收到消息后会返回一个confirm给生产者</p><p>持久化</p><p>需要设置</p><p>服务重启后也不会消失</p><p>如果都设置了持久化，消息会被写入磁盘</p><p>ack</p><p>需要手动开启</p><p>消费者收到消息后会给mq返回一个ack，mq才会删除消息</p><h1 id="使用rabbitmq主要是实现了什么功能？如何实现的"><a href="#使用rabbitmq主要是实现了什么功能？如何实现的" class="headerlink" title="使用rabbitmq主要是实现了什么功能？如何实现的"></a>使用rabbitmq主要是实现了什么功能？如何实现的</h1><p>异步备份，每当一个文件上传成功，就往消息队列里传入文件信息，然后备份程序获得文件名和路径，备份到云端</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Project</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Net Note</title>
+    <link href="/2025/06/28/Note/Hire/Net/"/>
+    <url>/2025/06/28/Note/Hire/Net/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Http和Tcp区别"><a href="#Http和Tcp区别" class="headerlink" title="Http和Tcp区别"></a>Http和Tcp区别</h1><p>tcp是传输层，端到端协议，不加密，流式传输，传输无状态，连接有状态，三次握手四次挥手，数据单位是字节流，连接可靠</p><p>http是应用层协议，数据单位是请求响应，基于tcp，无状态，就是说上一次发送的http连接对下一次发送得到的响应没有影响，http本身是无状态的，但是一些机制会让它看起来有状态</p><h1 id="客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢"><a href="#客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢" class="headerlink" title="客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢"></a>客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢</h1><p>tcp是0到无数个，无数个这种情况是某个包服务端没收到，然后触发客户端重传，但是服务端仍不返回ack,但是你要严格说客户端至始至终都发了三个包的话，那么服务端只能接收0到三个包，少于三个都是丢包的情况</p><p>udp这种就是0到3个，因为没有重传机制</p><h1 id="TCP协议如何保证可靠"><a href="#TCP协议如何保证可靠" class="headerlink" title="TCP协议如何保证可靠"></a>TCP协议如何保证可靠</h1><p>超时重传</p><p>拥塞控制</p><p>ack,seq</p><p>三次握手四次挥手</p><p>滑动窗口，允许一次接收的包个数</p><h1 id="HTTP和TCP的keepalive有什么区别"><a href="#HTTP和TCP的keepalive有什么区别" class="headerlink" title="HTTP和TCP的keepalive有什么区别"></a>HTTP和TCP的keepalive有什么区别</h1><p>tcp的keepalive主要用于检测tcp连接是否断开</p><p>http的keepalive代表要复用这个tcp连接</p><p>两者可以共存</p><h1 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h1><h2 id="TCP为什么开始发送速率比较低"><a href="#TCP为什么开始发送速率比较低" class="headerlink" title="TCP为什么开始发送速率比较低"></a>TCP为什么开始发送速率比较低</h2><p>因为开始的时候拥塞窗口较小，随着数据包的发送，拥塞窗口变大，发送速率变快</p><h3 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h3><p>拥塞窗口指数增长，到达阈值就会进入拥塞避免状态</p><h3 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h3><p>拥塞窗口线性增长</p><h3 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h3><p>长时间没有收到ack，触发重传，进入慢启动</p><h3 id="快恢复"><a href="#快恢复" class="headerlink" title="快恢复"></a>快恢复</h3><p>拥塞窗口变为当前一半，阈值变为当前+3，还是拥塞避免状态</p><h3 id="快重传"><a href="#快重传" class="headerlink" title="快重传"></a>快重传</h3><p>收到超过三个ack就直接重传，不再等待超时，触发快恢复</p><p><img src="/2025/06/28/Note/Hire/Net/image.png" alt="image"></p><h1 id="TCP释放连接中的2TSL的作用是什么"><a href="#TCP释放连接中的2TSL的作用是什么" class="headerlink" title="TCP释放连接中的2TSL的作用是什么"></a>TCP释放连接中的2TSL的作用是什么</h1><p>用来保证对方收到消息，如果没有收到消息，对面会发送fin,然后我方发送ack,避免对方一直处于last_ack状态</p><p>tsl是一个tcp报文能存活的最长时间，通常为30s</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Net</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++ Note</title>
+    <link href="/2025/06/28/Note/Hire/C++/"/>
+    <url>/2025/06/28/Note/Hire/C++/</url>
+    
+    <content type="html"><![CDATA[<h1 id="虚函数原理"><a href="#虚函数原理" class="headerlink" title="虚函数原理"></a>虚函数原理</h1><h2 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h2><p>使接口统一，更加抽象</p><p>虚函数靠虚函数表和虚函数指针实现</p><p>虚函数表在程序的只读数据段，存放的是一个个虚函数的地址</p><h2 id="基类的析构函数要加virtual关键字吗？不加virtual会有什么后果？"><a href="#基类的析构函数要加virtual关键字吗？不加virtual会有什么后果？" class="headerlink" title="基类的析构函数要加virtual关键字吗？不加virtual会有什么后果？"></a>基类的析构函数要加virtual关键字吗？不加virtual会有什么后果？</h2><p>要，不加的话，用基类指针指向派生类地址然后调用析构的话会调用基类的析构函数，会造成派生类成员没被清除，内存泄漏</p><h1 id="vector底层原理"><a href="#vector底层原理" class="headerlink" title="vector底层原理"></a>vector底层原理</h1><p>vector跟数组很像，但是是一个会扩展的数组，他只能尾插，支持下标访问，也可以用at，at更安全，因为有边界检查，只支持尾插的原因是如果头插，vector是一块连续的内存，如果，头插会导致后面所有元素移动，效率变为O(n)，还有就是内存满了会自动扩容，然后将元素，拷贝或者移动到另一块内存空间，优先调用移动，扩容的空间大小通常为1.5或则2倍,扩容之后就算删除其内元素也不会减少容量，可以使用临时对象和现有对象swap销毁</p><p>size只计算实际元素的数量</p><p>capacity计算容量</p><p>resize(n)只改变逻辑大小，如果 <code>n &gt; capacity()</code>，会触发扩容（重新分配内存）,&lt;&#x3D;的话不会改变容量，会删除元素</p><p>reverse会改变容量大小，如果 <code>n &lt;= capacity()</code>，则什么都不做，&#x3D;&#x3D;只能增加容量&#x3D;&#x3D;懂吗</p><h1 id="malloc和new"><a href="#malloc和new" class="headerlink" title="malloc和new"></a>malloc和new</h1><p>malloc不针对类</p><p>new针对类，也就是说可以调用构造函数,可以&#x3D;&#x3D;重载&#x3D;&#x3D;，需要static，并和delete成对出现</p><p>malloc类型不安全，可以强制转换类型</p><h2 id="什么时候使用new"><a href="#什么时候使用new" class="headerlink" title="什么时候使用new"></a>什么时候使用new</h2><p>需要创建堆上的对象，不受栈的生命周期控制</p><p>自主调用构造和析构函数</p><p>创建大型数据</p><h1 id="hash表原理"><a href="#hash表原理" class="headerlink" title="hash表原理"></a>hash表原理</h1><p>插入时通过hash函数获取下标，如果冲突，因为通常每一个元素都是链表，直接在链表尾部插入元素，有的会下标+1存储元素，链表方式和尾部插如果链表过长会导致时间复杂度趋向于O(n)</p><h1 id="C-的struct中没有任何变量，sizeof为多少？"><a href="#C-的struct中没有任何变量，sizeof为多少？" class="headerlink" title="C++的struct中没有任何变量，sizeof为多少？"></a>C++的struct中没有任何变量，sizeof为多少？</h1><blockquote><p>混沌思考的东西：</p><p>ALTER USER ‘root‘@’localhost’ IDENTIFIED WITH mysql_native_password BY ‘1234’;</p><p>struct在C++中类似于一个类，好像就默认的访问控制有区别，空类的大小为1字节，用于区别不同空类，因为空类也是可以实例化的，但是一个int类大小为4字节，我的理解是int类实例化之后本身的int数据可以用于区分不同int类。</p><p>这种说法不对，每一个对象内存中都有唯一地址用于区分对象</p><p>新奇的说法：</p><p>C++ 标准要求每个对象都必须占用至少一个字节，这样可以保证两个不同对象实例有不同的内存地址。</p><p>如果一个空类的大小为0，那么当你创建多个空对象时，它们可能会被分配到同一个内存地址，从而无法区分它们。</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">IntHolder</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> value;<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">IntHolder</span>(<span class="hljs-type">int</span> v) : <span class="hljs-built_in">value</span>(v) &#123;&#125;<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getValue</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123; <span class="hljs-keyword">return</span> value; &#125;<br>&#125;;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-function">IntHolder <span class="hljs-title">a</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br>    <span class="hljs-function">IntHolder <span class="hljs-title">b</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;a的地址: &quot;</span> &lt;&lt; &amp;a &lt;&lt; <span class="hljs-string">&quot;, b的地址: &quot;</span> &lt;&lt; &amp;b &lt;&lt; std::endl;                 <span class="hljs-comment">// 不同的地址</span><br>    std::cout &lt;&lt; <span class="hljs-string">&quot;a的值: &quot;</span> &lt;&lt; a.<span class="hljs-built_in">getValue</span>() &lt;&lt; <span class="hljs-string">&quot;, b的值: &quot;</span> &lt;&lt; b.<span class="hljs-built_in">getValue</span>() &lt;&lt; std::endl; <span class="hljs-comment">// 相同的值(10)</span><br>    std::cout &lt;&lt; <span class="hljs-string">&quot;a.value的地址: &quot;</span> &lt;&lt; (<span class="hljs-type">void</span> *)&amp;(((IntHolder *)&amp;a)-&gt;value) &lt;&lt; std::endl;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;b.value的地址: &quot;</span> &lt;&lt; (<span class="hljs-type">void</span> *)&amp;(((IntHolder *)&amp;b)-&gt;value) &lt;&lt; std::endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>不同实例都有一个地址，假设同名空类实例化了两个类，怎么区分，就是因为不同实例中都有一个字节的存储空间用于区分彼此，这个地址也就是这个实例的地址，上面这段代码结果显示a类的地址和a.value的地址一样的，更能说明问题</p><p>int派生类继承空类，大小由于优化仍然为4字节，多继承一样(不同编译器可能不一样)</p><p>纯抽象类有指向虚函数表的虚函数指针，所以大小8字节，关于抽象类更多的还没仔细了解</p><h2 id="这才是真理："><a href="#这才是真理：" class="headerlink" title="这才是真理："></a>这才是真理：</h2><p>&#x3D;&#x3D;没有数据成员就代表没有地址，所以必须得有数据成员才有地址，有地址才能区分不同的类&#x3D;&#x3D;</p><h1 id="list，set，vector区别"><a href="#list，set，vector区别" class="headerlink" title="list，set，vector区别"></a>list，set，vector区别</h1><table><thead><tr><th>特性</th><th><code>std::vector</code></th><th><code>std::list</code></th><th><code>std::set</code></th></tr></thead><tbody><tr><td><strong>底层实现</strong></td><td>动态数组</td><td>双向链表</td><td>红黑树</td></tr><tr><td><strong>插入&#x2F;删除效率</strong></td><td>元素在内存中连续存储，所以尾部插入&#x2F;删除都是O(1),如果中间或者前面进行插入删除后面的元素都要移动，就是O(n)</td><td>不是连续存储的，通过指针连接，找到要插入删除的位置就是O(n),但找到之后插入删除就是O(1)</td><td>插入之后要排序，插入的动作效率适中</td></tr><tr><td><strong>访问效率</strong></td><td>随机访问O(1)</td><td>不支持随机访问</td><td>双向迭代器，只支持向前向后,红黑树O(logn)</td></tr><tr><td><strong>是否有序</strong></td><td>插入顺序</td><td>插入顺序</td><td>自动排序</td></tr><tr><td><strong>重复元素</strong></td><td>可以</td><td>可以</td><td>不行</td></tr><tr><td><strong>内存开销</strong></td><td>连续存储，低</td><td>前后指针，高</td><td>树结构，高</td></tr><tr><td><strong>适用场景</strong></td><td>频繁尾插尾删</td><td>频繁中间插入删除</td><td>去重，排序</td></tr></tbody></table><h1 id="c-从编译到执行经过了什么步骤，能不能详细描述"><a href="#c-从编译到执行经过了什么步骤，能不能详细描述" class="headerlink" title="c++从编译到执行经过了什么步骤，能不能详细描述"></a>c++从编译到执行经过了什么步骤，能不能详细描述</h1><h2 id="1，预处理"><a href="#1，预处理" class="headerlink" title="1，预处理"></a>1，预处理</h2><p>总结就是处理所有与#相关的内容</p><p>去除所有注释，当然还包括&#x2F;&#x2F;或者&#x2F;**&#x2F;这样的注释</p><p>替换宏定义</p><p>将&#x3D;&#x3D;头文件包含&#x3D;&#x3D;到cc文件</p><p>处理一些条件编译控制例如</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure><p>输入是cc文件，输出是.i文件</p><h2 id="2-编译（Compilation）"><a href="#2-编译（Compilation）" class="headerlink" title="2. 编译（Compilation）"></a>2. <strong>编译（Compilation）</strong></h2><p>对代码进行语法检查，对代码进行优化，将代码转为汇编</p><p>.i文件变为.s文件</p><h2 id="3-汇编（Assembly）"><a href="#3-汇编（Assembly）" class="headerlink" title="3. 汇编（Assembly）"></a>3. <strong>汇编（Assembly）</strong></h2><p>将汇编变为机器码</p><p>.s文件变为.o文件</p><h2 id="4-链接（Linking）"><a href="#4-链接（Linking）" class="headerlink" title="4. 链接（Linking）"></a>4. <strong>链接（Linking）</strong></h2><ul><li><strong>输入</strong> ：多个 <code>.o</code> 文件 + 库文件（静态库 <code>.a</code> &#x2F; 动态库 <code>.so</code> 或 <code>.dll</code>）</li><li><strong>输出</strong> ：可执行文件</li></ul><p>不同.o文件中有入口函数，一点一点的将需要的内容填充到只是做了声明的位置，不同数据区合并，然后生成了可执行文件</p><h1 id="指针和引用的区别"><a href="#指针和引用的区别" class="headerlink" title="指针和引用的区别"></a>指针和引用的区别</h1><table><thead><tr><th>特性</th><th>指针</th><th>引用</th></tr></thead><tbody><tr><td>是否可以为空</td><td>可以</td><td>不行，必须绑定对象</td></tr><tr><td>是否可以重新赋值</td><td>可以</td><td>不行</td></tr><tr><td>是否需要解引用</td><td>可以</td><td>不用</td></tr><tr><td>是否需要取地址</td><td>不行</td><td>可以</td></tr><tr><td>是否支持指针运算</td><td>支持</td><td>不行</td></tr><tr><td>是否能绑定到临时对象</td><td>不行</td><td>可以</td></tr><tr><td>内存占用</td><td>有</td><td>0(逻辑别名)</td></tr></tbody></table><h1 id="说一下构造函数和析构函数"><a href="#说一下构造函数和析构函数" class="headerlink" title="说一下构造函数和析构函数"></a>说一下构造函数和析构函数</h1><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>无返回值</p><p>变长参数</p><p>可有多个构造函数，重载</p><p>默认构造函数无参</p><p>初始化列表</p><p>移动和拷贝构造函数</p><p>析构函数</p><p>无参</p><p>无法重载</p><p>自动调用</p><p>如果类涉及继承，通常会声明为virtual,确保通过基类指针删除派生类对象调用派生类析构函数</p><h1 id="什么时候使用指针"><a href="#什么时候使用指针" class="headerlink" title="什么时候使用指针"></a>什么时候使用指针</h1><p>对象太大，放在栈上不合适</p><p>作为函数参数传递大的数据结构</p><p>实现数据结构，例如链表，树这类的</p><p>多态，基类指针指向派生类对象</p><p>智能指针自动管理内存</p><p>很多系统调用和库函数都用到指针</p><h1 id="申请内存需要注意些什么"><a href="#申请内存需要注意些什么" class="headerlink" title="申请内存需要注意些什么"></a>申请内存需要注意些什么</h1><p>要匹配释放方式，比如new要对应delete,new[]要对应delete[]</p><p>释放内存后将指针设为nullptr</p><p>避免double free</p><p>防止访问越界</p><h1 id="开发过程中出现边界异常如何进行处理，如何进行异常保护"><a href="#开发过程中出现边界异常如何进行处理，如何进行异常保护" class="headerlink" title="开发过程中出现边界异常如何进行处理，如何进行异常保护"></a>开发过程中出现边界异常如何进行处理，如何进行异常保护</h1><p>使用stl容器，使用at,不要使用[],自动检查边界抛出异常，暂时只有这一个想法</p><h1 id="weak-ptr和shared-ptr的区别，shared-ptr的实现原理"><a href="#weak-ptr和shared-ptr的区别，shared-ptr的实现原理" class="headerlink" title="weak_ptr和shared_ptr的区别，shared_ptr的实现原理"></a>weak_ptr和shared_ptr的区别，shared_ptr的实现原理</h1><p>先说这两个的作用，shared_ptr就是正常智能指针用的，但是多个对象可以共享一个资源的所有权，直到引用计数为0，释放资源</p><p>weakptr感觉就是weakptr的插件一样，就是为了解决循环引用设计的，还有就是安全的访问shareptr的资源，可以判断资源是否还存在</p><p>shareptr控制块里有指向资源的指针，user_count，weak_count，user_count用来计算多少个shareptr指向它，如果为0就会释放资源，但是控制块不一定被释放，weak_count表示当前有多少个weakptr观察，如果在资源销毁的前提下，weak_count为0才会销毁控制块</p><h2 id="shared-ptr在什么情况下会造成内存泄漏？"><a href="#shared-ptr在什么情况下会造成内存泄漏？" class="headerlink" title="shared_ptr在什么情况下会造成内存泄漏？"></a>shared_ptr在什么情况下会造成内存泄漏？</h2><p>自定义删除未将资源删除干净</p><p>循环引用</p><h2 id="手写-shared-ptr"><a href="#手写-shared-ptr" class="headerlink" title="手写 shared_ptr"></a>手写 shared_ptr</h2><p>已经完成，重要的就是一些拷贝构造和赋值运算符函数和指针的运用</p><h1 id="讲一下C-的模板和虚函数是什么？"><a href="#讲一下C-的模板和虚函数是什么？" class="headerlink" title="讲一下C++的模板和虚函数是什么？"></a>讲一下C++的模板和虚函数是什么？</h1><p>模板分为函数模板和类模板</p><p>都是编译时检查类型，静态绑定，使函数和类可以支持多种类型，代码复用，一套逻辑可以适用多种类型</p><p>虚函数就是运行时多态，允许子类重写父类的方法，并通过基类指针或引用调用子类实现</p><p>静态和动态区分在是否要通过虚函数表获取函数地址再调用</p><h2 id="一个class里面，模板函数可以是虚函数吗？"><a href="#一个class里面，模板函数可以是虚函数吗？" class="headerlink" title="一个class里面，模板函数可以是虚函数吗？"></a>一个class里面，模板函数可以是虚函数吗？</h2><p>不可以，</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;<br>    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">process</span><span class="hljs-params">(T value)</span> </span>= <span class="hljs-number">0</span>; <span class="hljs-comment">// ❌ 错误！不允许这样做</span><br>&#125;;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Derived</span> : <span class="hljs-keyword">public</span> Base &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">process</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> <span class="hljs-keyword">override</span> </span>&#123;&#125;      <span class="hljs-comment">// int 版本</span><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">process</span><span class="hljs-params">(<span class="hljs-type">double</span> x)</span> <span class="hljs-keyword">override</span> </span>&#123;&#125;   <span class="hljs-comment">// double 版本？</span><br>&#125;;<br></code></pre></td></tr></table></figure><p>虚函数表需要确定的函数，函数模板也可以生成确定的函数，虽然两者都是编译时期生成的，但是虚函数表确定在函数模板生成函数之前，虚函数表得不到具体函数，所以不可以</p><p>虚函数表是在类定义完成时就由编译器构造</p><p>而模板函数是到代码文件的使用阶段就是进入main函数才会由编译器生成</p><p>虚函数 <code>say</code> 的地址被写入 <code>.rodata</code> 中的 vtable 段（如 <code>_ZTV4Base</code>）</p><p>模板函数 <code>tmpl&lt;int&gt;</code> 的代码段只在 <code>main</code> 调用之后才出现在文本段</p><h2 id="为什么模板函数体要放在-h文件里面？"><a href="#为什么模板函数体要放在-h文件里面？" class="headerlink" title="为什么模板函数体要放在.h文件里面？"></a>为什么模板函数体要放在.h文件里面？</h2><p>这个恰好对应了上面模板函数的具体化是在编译时碰到main函数中具体应用时才会发生</p><p>现在有三个文件，模板函数是max</p><p>max.h,max.cc,main.cc</p><p>编译器在编译main.cc时，因为还没有链接，还没有函数定义，只有类模板函数的声明，但是类模板函数的声明没有用，类模板函数必须要有模板函数定义</p><h1 id="inline-函数为什么可以在头文件中定义"><a href="#inline-函数为什么可以在头文件中定义" class="headerlink" title="inline 函数为什么可以在头文件中定义"></a>inline 函数为什么可以在头文件中定义</h1><p>正常来说，普通函数实现是不能够放在头文件的，因为如果有多个cc文件引入了头文件就会在链接时报错，函数重复定义，然而inline这个关键字会让链接时去除重复定义，这样最终的执行文件其实就一个函数定义</p><p>inline最初的作用是用来直接把函数代码放到执行文件里，这样就不用调用函数了，后来变成允许函数重复定义</p><p>对inline函数取地址会生成一个非内联函数副本，因为内联是在最后链接的时候去重一些内联函数的函数体，你不知道保留哪一个，只能编译的时候生成一个副本</p><p>构造和析构函数功能很多，太大，不适合内联，虚函数动态绑定，不知道选哪个函数</p><p>&#x3D;&#x3D;模板函数&#x3D;&#x3D;也很适合inline</p><h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>派生类析构是先调用自己的析构函数，再调用父类的析构函数</p><h1 id="Static关键字"><a href="#Static关键字" class="headerlink" title="Static关键字"></a>Static关键字</h1><p>静态成员函数，没有this指针</p><p>静态成员变量，类外初始化，所有类都能访问，而且访问的都是同一个，不同文件也访问的一样</p><p>局部静态变量，没啥用，程序运行期间只会初始化一次，后续不用创建，只能在函数内部访问，线程安全</p><p>全局静态变量，只能在当前文件有用</p><p>全局静态函数，只能在当前文件有用</p><h1 id="C-类中默认创建的函数有哪些"><a href="#C-类中默认创建的函数有哪些" class="headerlink" title="C++类中默认创建的函数有哪些"></a>C++类中默认创建的函数有哪些</h1><p>构造，析构，拷贝构造，移动构造，拷贝赋值运算符，移动赋值运算符</p><h2 id="什么情况下要用到拷贝构造函数"><a href="#什么情况下要用到拷贝构造函数" class="headerlink" title="什么情况下要用到拷贝构造函数"></a>什么情况下要用到拷贝构造函数</h2><p>需要用一个已有对象初始化一个对象</p><p>函数参数值传递，函数返回值值传递</p><h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>静态绑定（编译时多态）</p><p>模板，重载</p><p>动态绑定（运行时多态）</p><p>虚函数</p><h1 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h1><p>template<typename t><br>void func(T&amp;&amp;);</typename></p><p>模板中T&amp;&amp;是个万能引用，他这一直都是引用传递，不是&#x3D;&#x3D;值传递&#x3D;&#x3D;</p><p>涉及到模板中万能引用，还有一个完美转发</p><p>forward</p><h2 id="右值"><a href="#右值" class="headerlink" title="右值"></a>右值</h2><p>就是没有名字的临时变量</p><h1 id="C-11相比C-98新增加了哪些特性"><a href="#C-11相比C-98新增加了哪些特性" class="headerlink" title="C++ 11相比C++ 98新增加了哪些特性"></a>C++ 11相比C++ 98新增加了哪些特性</h1><p>智能指针</p><p>auto推断类型</p><p>lambda表达式</p><p>移动语义</p><p>初始化列表</p><p>decltype 获取表达式类型</p><p>override 明确覆盖虚函数</p><p>final 禁止继续派生</p><p>noexpect 指定函数不抛出异常</p><p>default指定编译器生成默认函数</p><p>delete删除某些函数</p><p>using别名模板</p><p>thread_local线程局部存储</p><h1 id="熟悉多线程编程吗-锁有哪几种-怎么实现的"><a href="#熟悉多线程编程吗-锁有哪几种-怎么实现的" class="headerlink" title="熟悉多线程编程吗,锁有哪几种,怎么实现的"></a>熟悉多线程编程吗,锁有哪几种,怎么实现的</h1><p>读写锁</p><p>互斥锁</p><p>可重入锁</p><p>避免递归导致两次加锁造成死锁，跟shareptr一样都是计数，要求&#x3D;&#x3D;解锁&#x3D;&#x3D;相同次数</p><h1 id="STL中的-unordered-map-和-map-有什么区别"><a href="#STL中的-unordered-map-和-map-有什么区别" class="headerlink" title="STL中的 unordered_map 和 map 有什么区别"></a>STL中的 unordered_map 和 map 有什么区别</h1><p>所有unordered的都是hashtable</p><h1 id="三个线程，线程1打印a，线程2打印b，线程3打印c。如何做到顺序打印a，b，c"><a href="#三个线程，线程1打印a，线程2打印b，线程3打印c。如何做到顺序打印a，b，c" class="headerlink" title="三个线程，线程1打印a，线程2打印b，线程3打印c。如何做到顺序打印a，b，c"></a>三个线程，线程1打印a，线程2打印b，线程3打印c。如何做到顺序打印a，b，c</h1><p>使用unique_lock</p><h1 id="介绍一下异常，传播异常的细节"><a href="#介绍一下异常，传播异常的细节" class="headerlink" title="介绍一下异常，传播异常的细节"></a>介绍一下异常，传播异常的细节</h1><p>异常传播就是栈展开的，一旦出现异常，不管是嵌套还是怎么着，后面的代码都不会执行，只执行catch里面的代码，然后没有catch到，那么程序会直接终止，性能开销较大，然后就是要做好内存管理，防止内存泄漏</p><h1 id="RAII"><a href="#RAII" class="headerlink" title="RAII"></a>RAII</h1><p>智能指针原理就是RAII,构造时分配内存，析构时释放内存，还有用处就是不用在try,catch后再加入finally释放内存了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Algorithm Note</title>
+    <link href="/2025/06/28/Note/Hire/Algorithm/"/>
+    <url>/2025/06/28/Note/Hire/Algorithm/</url>
+    
+    <content type="html"><![CDATA[<h1 id="几十亿个数找一个数出现2次怎么找"><a href="#几十亿个数找一个数出现2次怎么找" class="headerlink" title="几十亿个数找一个数出现2次怎么找"></a>几十亿个数找一个数出现2次怎么找</h1><p>使用bitmap，然后出现两次就用2b存储</p><p>bitmap就是类似，假如我现在有123456789，9个数</p><p>然后二进制10000000表示1</p><p>二进制01000000表示2就这样表示，我就只需要9b就可以表示正常来说36B的数据,但是这个是来按&#x3D;&#x3D;最大数&#x3D;&#x3D;决定的</p><p>假如40个亿数就是4x10^9约等于2^32,一个int位图能够表示32个数，就是128M个int，就是512MB，但是表示2次出现就要1GB，因为这个bitmap能表示2^32个数，所以不会有超出范围的风险，因为最大也就是2^32-1</p><h1 id="说三种排序算法复杂度"><a href="#说三种排序算法复杂度" class="headerlink" title="说三种排序算法复杂度"></a>说三种排序算法复杂度</h1><h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>时间复杂度为O(n^2)</p><p>空间复杂度为O(1),原地排序</p><h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>时间复杂度为O(nlogn)</p><p>空间复杂度O(logn)，递归栈</p><p>快排不稳定，因为基数会跳跃</p><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>时间复杂度为O(nlogn)</p><p>空间复杂度为O(n)，因为需要一个相同长度数组辅助排序</p><h2 id="什么是排序算法的稳定性？"><a href="#什么是排序算法的稳定性？" class="headerlink" title="什么是排序算法的稳定性？"></a>什么是排序算法的稳定性？</h2><p>就是相同元素的顺序有没有变</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Algorithm</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Basic Note</title>
+    <link href="/2025/06/28/Note/Hire/Basic/"/>
+    <url>/2025/06/28/Note/Hire/Basic/</url>
+    
+    <content type="html"><![CDATA[<h1 id="幂等性"><a href="#幂等性" class="headerlink" title="幂等性"></a>幂等性</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>类似于重复发包，但是网站成功接受了</p><h1 id="rpc和http协议的区别"><a href="#rpc和http协议的区别" class="headerlink" title="rpc和http协议的区别"></a>rpc和http协议的区别</h1><p>rpc作用是像本地调用函数一样调用远程函数</p><p>适合微服务内部通信或分布式系统</p><p>http又叫超文本协议</p><h1 id="讲一个分布式唯一id"><a href="#讲一个分布式唯一id" class="headerlink" title="讲一个分布式唯一id"></a>讲一个分布式唯一id</h1><p>分布式唯一id就是分布式系统中为了保持一些消息的唯一性设立，生成方法最著名的就是雪花算法，简单的就是uuid</p><p>但分布式唯一id尽量要自增，如果是随机的话那么插入到mysql数据库底层的b+树里会对结构影响较大，但是雪花算法可以生成自增的id</p><h2 id="雪花算法"><a href="#雪花算法" class="headerlink" title="雪花算法"></a>雪花算法</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>生成自增id</p><p>生成的是一个long型数据，较小</p><h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>跟时钟绑定，分布式中不同机器的时钟不一定一样，导致不会全局自增，但是id单机自增</p><h1 id="C语言中，数组和指针的关系是什么"><a href="#C语言中，数组和指针的关系是什么" class="headerlink" title="C语言中，数组和指针的关系是什么"></a>C语言中，数组和指针的关系是什么</h1><p>数组名可以退化为指针，但是它本身不是指针，它是数组，只是转换成了指针</p><h1 id="堆栈区别"><a href="#堆栈区别" class="headerlink" title="堆栈区别"></a>堆栈区别</h1><p>栈上的内存是自动分配的，堆是手动分配的，释放方式，栈，离开作用域，生命周期短，堆手动释放，生命周期长</p><p>栈的访问速度更快，连续内存</p><p>堆慢，通过指针访问，而且碎片化</p><p>栈是每个线程独有，堆是进程独有，线程共享</p><p>栈有可能栈溢出，就是空间不够</p><p>堆一般只有内存不足</p><h1 id="B树，B-树的理解"><a href="#B树，B-树的理解" class="headerlink" title="B树，B+树的理解"></a>B树，B+树的理解</h1><p>b树叶子节点也存放数据，b+树非叶子节点不存放数据，只有叶子节点存放数据，通过指针串联，形成一个有序链表，b+树的查询次数非常稳定，遍历也更方便，只需要遍历一下链表</p><h1 id="如何让函数在进入main函数之前被调用？"><a href="#如何让函数在进入main函数之前被调用？" class="headerlink" title="如何让函数在进入main函数之前被调用？"></a>如何让函数在进入main函数之前被调用？</h1><p>全局对象创建</p><h1 id="多进程和多线程各自的应用场景"><a href="#多进程和多线程各自的应用场景" class="headerlink" title="多进程和多线程各自的应用场景"></a>多进程和多线程各自的应用场景</h1><p>感觉没啥好讲的，web服务器适合多进程加上多线程</p><p>分布式适合多进程</p><p>别的不知道什么适合多进程</p><h1 id="内存里的有序索引一般使用什么数据结构"><a href="#内存里的有序索引一般使用什么数据结构" class="headerlink" title="内存里的有序索引一般使用什么数据结构"></a>内存里的有序索引一般使用什么数据结构</h1><p>linux用的红黑树</p><h1 id="select-poll-epoll-水平触发，边沿触发的理解"><a href="#select-poll-epoll-水平触发，边沿触发的理解" class="headerlink" title="select poll epoll 水平触发，边沿触发的理解"></a>select poll epoll 水平触发，边沿触发的理解</h1><p>select是当有文件描述符就绪的时候，你需要遍历文件描述符集合，而且文件描述符集合大小有限制，为1024，可以更改，使用位图</p><p>select和poll也不支持水平触发，poll就是文件描述符大小限制</p><p>epoll则返回的是就绪文件描述符的集合，不需要遍历所有文件描述符的集合</p><table><thead><tr><th>功能&#x2F;特性</th><th><code>select</code></th><th><code>poll</code></th><th><code>epoll</code></th></tr></thead><tbody><tr><td>FD 上限</td><td>有（如 1024）</td><td>无</td><td>几乎无限</td></tr><tr><td>数据结构</td><td><code>fd_set</code>（位图）</td><td><code>struct pollfd[]</code></td><td>内核红黑树 + 就绪队列</td></tr><tr><td>每次调用是否复制</td><td>是</td><td>是</td><td>否（只在注册时）</td></tr><tr><td>是否需要遍历</td><td>是</td><td>是</td><td>否（返回就绪列表）</td></tr><tr><td>是否支持 ET&#x2F;LT</td><td>否</td><td>否</td><td>是</td></tr><tr><td>性能</td><td>低</td><td>中</td><td>高</td></tr><tr><td>可移植性</td><td>高（跨平台）</td><td>较高</td><td>Linux 专属</td></tr></tbody></table><p>边沿触发就是文件描述符的状态发生变化，例如有可读变为不可读，不可读变为可读，而且必须&#x3D;&#x3D;一次将数据读完&#x3D;&#x3D;，不然状态一直处于可读状态，再有数据发过来，epoll不会就绪</p><h1 id="增加删除元素，哪几种数据结构的迭代器不失效"><a href="#增加删除元素，哪几种数据结构的迭代器不失效" class="headerlink" title="增加删除元素，哪几种数据结构的迭代器不失效"></a>增加删除元素，哪几种数据结构的迭代器不失效</h1><p>红黑树和链表就是map&#x2F;set和list</p><h1 id="你是如何找系统性能瓶颈的"><a href="#你是如何找系统性能瓶颈的" class="headerlink" title="你是如何找系统性能瓶颈的"></a>你是如何找系统性能瓶颈的</h1><p>使用火焰图</p><h1 id="当一个服务上线后，若发现有异常的陡增内存上升等，用过什么工具做排查定位没"><a href="#当一个服务上线后，若发现有异常的陡增内存上升等，用过什么工具做排查定位没" class="headerlink" title="当一个服务上线后，若发现有异常的陡增内存上升等，用过什么工具做排查定位没"></a>当一个服务上线后，若发现有异常的陡增内存上升等，用过什么工具做排查定位没</h1><p>只会用valgrind</p><h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>简单工厂模式</p><p>不符合开闭原则，要想添加新产品，需要修改工厂类</p><p>工厂模式</p><p>符合开闭原则，通过一个抽象类和子类实现</p><p>就是扩展开放，而且修改关闭</p><p>抽象工厂模式</p><h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><p>很像epoll</p><p>将修改通知给观察者</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Basic</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>System Note</title>
+    <link href="/2025/05/09/Note/Hire/System/"/>
+    <url>/2025/05/09/Note/Hire/System/</url>
+    
+    <content type="html"><![CDATA[<h1 id="TLB的作用"><a href="#TLB的作用" class="headerlink" title="TLB的作用"></a>TLB的作用</h1><p>cpu得到了虚拟地址，现在要物理地址，访问tlb或者页表获得物理地址</p><p>加速地址的获取，就跟redis差不多，cpu访问地址，要先通过tlb,如果没命中，就查找页表，然后更新tlb，访问页表肯定比访问tlb慢</p><h1 id="字符串的二进制安全"><a href="#字符串的二进制安全" class="headerlink" title="字符串的二进制安全"></a>字符串的二进制安全</h1><p>就是c类型的数组会以\0截断，计算长度如果中间有它结果就不对</p><h1 id="使用链表管理共享内存分配，如果一个进程A申请了一块新的内存，结果进程A挂了，怎么回收这块内存"><a href="#使用链表管理共享内存分配，如果一个进程A申请了一块新的内存，结果进程A挂了，怎么回收这块内存" class="headerlink" title="使用链表管理共享内存分配，如果一个进程A申请了一块新的内存，结果进程A挂了，怎么回收这块内存"></a>使用链表管理共享内存分配，如果一个进程A申请了一块新的内存，结果进程A挂了，怎么回收这块内存</h1><p>守护进程定期清理</p><p>信号处理</p><h1 id="什么是死锁，死锁的必要条件"><a href="#什么是死锁，死锁的必要条件" class="headerlink" title="什么是死锁，死锁的必要条件"></a>什么是死锁，死锁的必要条件</h1><p>死锁就是多个线程竞争资源，陷入相互等待的情况</p><p>条件</p><p>互斥</p><p>不可抢占</p><p>持有并等待</p><p>循环等待</p><h1 id="进程和线程区别"><a href="#进程和线程区别" class="headerlink" title="进程和线程区别"></a>进程和线程区别</h1><p>进程间通信通过IPC(进程间通信，就是管道，socket，共享内存，信号，信号量，消息队列)，线程通过共享内存，直接就是进程的内存</p><p>切换开销</p><p>进程切换开销比线程大</p><p>线程也可以看作是进程，不过线程更加轻量化</p><p>进程更加独立，更加安全，线程崩溃可能会影响进程，线程也是内核态，协程才是用户态，与线程关系跟进程和线程关系差不多</p><p>进程有父子关系，线程平等</p><p>CPU调度单位是线程，进程是资源调度单位</p><h1 id="内核态和用户态的区别？什么情况会陷入到内核态"><a href="#内核态和用户态的区别？什么情况会陷入到内核态" class="headerlink" title="内核态和用户态的区别？什么情况会陷入到内核态"></a>内核态和用户态的区别？什么情况会陷入到内核态</h1><p>调用系统函数会进入内核态</p><h1 id="为什么区分"><a href="#为什么区分" class="headerlink" title="为什么区分"></a>为什么区分</h1><p>防止用户直接操作硬件，修改关键数据</p><p>避免用户程序崩溃导致系统崩溃</p><p>区别</p><h2 id="内核态"><a href="#内核态" class="headerlink" title="内核态"></a>内核态</h2><p>高权限</p><p>可直接操作硬件</p><p>执行核心操作(内存管理，IO,调度)</p><h2 id="用户态"><a href="#用户态" class="headerlink" title="用户态"></a>用户态</h2><p>权限较低</p><p>只能访问受限资源</p><p>无法操作硬件</p><h1 id="系统中线程上下文开销比较大，如何解决这个问题"><a href="#系统中线程上下文开销比较大，如何解决这个问题" class="headerlink" title="系统中线程上下文开销比较大，如何解决这个问题"></a>系统中线程上下文开销比较大，如何解决这个问题</h1><p>减少线程数量</p><p>减少阻塞操作</p><p>减少锁竞争和互斥访问</p><p>使用协程，或用户级线程(线程切换开销小)</p><h1 id="系统调用是如何实现的？linux-有哪些常见的系统调用"><a href="#系统调用是如何实现的？linux-有哪些常见的系统调用" class="headerlink" title="系统调用是如何实现的？linux 有哪些常见的系统调用"></a>系统调用是如何实现的？linux 有哪些常见的系统调用</h1><p>用户态到内核态的切换，通过调用系统函数</p><p>fork,send,recv,mmap,open,close,exit</p><h1 id="mmap和sendfile区别"><a href="#mmap和sendfile区别" class="headerlink" title="mmap和sendfile区别"></a>mmap和sendfile区别</h1><p>sendfile将发送文件全部交由内核执行</p><p>mmap就是内存映射，本身用来日志分析，不是很适合发送文件，虽然都是零拷贝</p><h1 id="一个文件描述符，向offset-3kb处写入4MB数据，操作系统中会发生什么"><a href="#一个文件描述符，向offset-3kb处写入4MB数据，操作系统中会发生什么" class="headerlink" title="一个文件描述符，向offset&#x3D;3kb处写入4MB数据，操作系统中会发生什么"></a>一个文件描述符，向offset&#x3D;3kb处写入4MB数据，操作系统中会发生什么</h1><p>操作系统先会调用lseek</p><p>再写入数据</p><p>如果文件本身没有3kb，操作系统会预留空间，形成稀疏文件</p><p>物理空间大小0kb,显示空间大小3kb</p><p>当一个服务上线后，若发现有异常的陡增内存上升等，用过什么工具做排查定位没</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Note</tag>
+      
+      <tag>System</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Consul</title>
+    <link href="/2025/04/29/reference/Consul/"/>
+    <url>/2025/04/29/reference/Consul/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Consul作用"><a href="#Consul作用" class="headerlink" title="Consul作用"></a>Consul作用</h1><p>就是存储每个服务的ip和端口，如果ip和端口变动，其他服务器能够知道就不用固定ip端口了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Reference</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Reference</tag>
+      
+      <tag>Consul</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Docker Reference</title>
+    <link href="/2025/04/25/reference/Docker/"/>
+    <url>/2025/04/25/reference/Docker/</url>
+    
+    <content type="html"><![CDATA[<h1 id="容器关闭删除后，重新启动镜像不会保留设置，因为你没有存进镜像里"><a href="#容器关闭删除后，重新启动镜像不会保留设置，因为你没有存进镜像里" class="headerlink" title="容器关闭删除后，重新启动镜像不会保留设置，因为你没有存进镜像里"></a>容器关闭删除后，重新启动镜像不会保留设置，因为你没有存进镜像里</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>Reference</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Docker</tag>
+      
+      <tag>Reference</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux</title>
     <link href="/2025/04/10/reference/Linux/"/>
     <url>/2025/04/10/reference/Linux/</url>
     
-    <content type="html"><![CDATA[<p>#Commands<br>Calclulate Disk Size<br><code>du -sh Dictsname</code></p><table><thead><tr><th align="center">Commands</th><th align="center">Comments</th></tr></thead><tbody><tr><td align="center"><code>du</code></td><td align="center">Disk Usage</td></tr><tr><td align="center">h</td><td align="center">human</td></tr><tr><td align="center">s</td><td align="center">summary</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<h1 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h1><p>Calclulate Disk Size<br><code>du -sh Dictsname</code></p><table><thead><tr><th align="center">Commands</th><th align="center">Comments</th></tr></thead><tbody><tr><td align="center"><code>du</code></td><td align="center">Disk Usage</td></tr><tr><td align="center">h</td><td align="center">human</td></tr><tr><td align="center">s</td><td align="center">summary</td></tr></tbody></table>]]></content>
     
     
     <categories>
@@ -35,7 +241,7 @@
     <link href="/2025/04/10/reference/Git/"/>
     <url>/2025/04/10/reference/Git/</url>
     
-    <content type="html"><![CDATA[<table><thead><tr><th align="center">Commands</th><th align="center">Function</th></tr></thead><tbody><tr><td align="center"><code>git ls-remote https://github.com/MountainThrough/1.git</code></td><td align="center">Cheack whether your local Git is connected to the remote</td></tr><tr><td align="center"><code>git config -l</code></td><td align="center">Check Local Git config</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<table><thead><tr><th align="center">Commands</th><th align="center">Function</th></tr></thead><tbody><tr><td align="center"><code>git ls-remote https://github.com/MountainThrough/1.git</code></td><td align="center">Cheack whether your local Git is connected to the remote</td></tr><tr><td align="center"><code>git config -l</code></td><td align="center">Check Local Git config</td></tr></tbody></table><h1 id="初始操作"><a href="#初始操作" class="headerlink" title="初始操作"></a>初始操作</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建一个孤儿分支（没有历史记录）</span><br>git switch --orphan main<br><span class="hljs-comment"># 提交一个空分支（不提交任何内容）</span><br>git commit --allow-empty -m <span class="hljs-string">&quot;Initial&quot;</span><br></code></pre></td></tr></table></figure><p>最先提交的分支就是默认分支，然后创建其他分支，尽量不要直接在main分支弄文件</p>]]></content>
     
     
     <categories>
@@ -47,9 +253,9 @@
     
     <tags>
       
-      <tag>git</tag>
-      
       <tag>Reference</tag>
+      
+      <tag>git</tag>
       
     </tags>
     
@@ -87,61 +293,11 @@
   
   
   <entry>
-    <title>20250401</title>
-    <link href="/2025/04/04/Todo/2025_4/4_1/"/>
-    <url>/2025/04/04/Todo/2025_4/4_1/</url>
-    
-    <content type="html"><![CDATA[<h1 id="2025年4月4日"><a href="#2025年4月4日" class="headerlink" title="2025年4月4日"></a>2025年4月4日</h1><h2 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h2><p>好久没写博客了，这几天还是在赶代码，也没啥好说的，就每天想业务逻辑什么的，也学到了一些知识，就是英语落下了，好几天没学了，有时候代码错误搞得没时间管这那，也没啥任务，就是想起来博客了，然后网盘也做好了底子，清明这几天放放假，也挺好</p><h1 id="2025年4月5日"><a href="#2025年4月5日" class="headerlink" title="2025年4月5日"></a>2025年4月5日</h1><ul><li><input disabled type="checkbox"> 网络安全实验：截止日期4&#x2F;14</li><li><input checked disabled type="checkbox"> 逆向工程实验：截止日期4&#x2F;7</li><li><input checked disabled type="checkbox"> 系统安全实验，截止日期老师没讲，大概也在4月7日左右</li><li><input disabled type="checkbox"> 软件安全实验，截止日期4&#x2F;8</li></ul><h1 id="2025年4月7日"><a href="#2025年4月7日" class="headerlink" title="2025年4月7日"></a>2025年4月7日</h1><ul><li><input disabled type="checkbox"> 文件传输适配</li><li><input checked disabled type="checkbox"> 文件hash适配</li><li><input disabled type="checkbox"> 用户登录</li><li><input disabled type="checkbox"> 用户注册</li><li><input disabled type="checkbox"> 密码验证</li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>Todo</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Todo</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>20250304</title>
-    <link href="/2025/03/24/Todo/2025_3/3_4/"/>
-    <url>/2025/03/24/Todo/2025_3/3_4/</url>
-    
-    <content type="html"><![CDATA[<h1 id="2025年3月24日"><a href="#2025年3月24日" class="headerlink" title="2025年3月24日"></a>2025年3月24日</h1><h2 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h2><p>今天一直在搞网盘项目，代码还不是很熟悉，加了个配置文件的功能。</p><ul><li><input checked disabled type="checkbox"> 网盘</li><li><input checked disabled type="checkbox"> 复习英语</li></ul><h1 id="2025年3月25日"><a href="#2025年3月25日" class="headerlink" title="2025年3月25日"></a>2025年3月25日</h1><h2 id="留痕-1"><a href="#留痕-1" class="headerlink" title="留痕"></a>留痕</h2><p>今天进度感觉确实好慢，想想干了啥，有点无语，就加了个文件hash的功能，我今天都没怎么休息，也就早上学的不多，我拷，真的是服了，可能是考虑那个文件路径分段了，后来发现直接用数据库就行了，不需要弄传统的文件路径，感觉文件表还得加个pwd，否则pwd命令实现起来效率低，然后就是原本想着</p><blockquote><p>先做hash函数，然后把hash函数融入进hashtable<br>哎呀，傻逼了，不用融合hashtable和hashfile函数的，搞半天，真傻逼</p></blockquote><p>希望明天能把文件表搞定，我也不要求融入到服务端，把SQL语句写完就不错了<br>现在是21点53分</p><p>明天必须干完数据库表之后就学英语或者复习c++,都弄完之后才能继续网盘</p><ul><li><input checked disabled type="checkbox"> 网盘</li></ul><h1 id="2025年3月26日"><a href="#2025年3月26日" class="headerlink" title="2025年3月26日"></a>2025年3月26日</h1><h2 id="留痕-2"><a href="#留痕-2" class="headerlink" title="留痕"></a>留痕</h2><p>今天干的我头好晕，尤其是晚饭那段时间，我滴妈，今天进度也很慢，八条命令的底子写好了，明天要做的就是写业务逻辑，感觉我一直ctrl+c，ctrl+v,问gpt，真的是服了，基础确实感觉不是很牢，我就一直在审代码，调bug，明天要是有时间的话了解一下关于try，throw这方面的。</p><ul><li><input disabled type="checkbox"> 详解ostringstream</li><li><input checked disabled type="checkbox"> 网盘</li></ul><p>好几天没写博客了，这几天就是把八条命令写完了，写了点作业，然后放松了2天没啥好说的</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>Todo</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Todo</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Mysql Note</title>
     <link href="/2025/03/21/Note/Hire/Mysql/"/>
     <url>/2025/03/21/Note/Hire/Mysql/</url>
     
-    <content type="html"><![CDATA[<h1 id="Transaction-Isolation"><a href="#Transaction-Isolation" class="headerlink" title="Transaction Isolation"></a>Transaction Isolation</h1><p>Serializable：</p><ul><li>共享锁（Shared Lock, S）：允许多个事务同时读取数据，但不允许修改。</li><li>排他锁（Exclusive Lock, X）：只允许一个事务对数据进行读取和修改，其他事务不能读取或修改。</li></ul><p>一个死锁错误背后的原理：<br>背景：</p><ul><li>先是右边查询表，然后左边查询表，左边更新数据，左边陷入等待，右边更新数据，右边报错，左边此时正常执行，隔离级别都是串行化。</li></ul><p><img src="/2025/03/21/Note/Hire/Mysql/image.png" alt="可串行化的死锁错误"></p><p>先是两边都加上了s锁，左边想要修改数据，没有权限等待，等待右边退出才能安装排他锁，结果右边也要上排他锁，等待左边退出，直接死锁，右边挂了，左边就执行了。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h1><p>Serializable：</p><ul><li>共享锁（Shared Lock, S）：允许多个事务同时读取数据，但不允许修改。</li><li>排他锁（Exclusive Lock, X）：只允许一个事务对数据进行读取和修改，其他事务不能读取或修改。</li></ul><p>一个死锁错误背后的原理：<br>背景：</p><ul><li>先是右边查询表，然后左边查询表，左边更新数据，左边陷入等待，右边更新数据，右边报错，左边此时正常执行，隔离级别都是串行化。</li></ul><p><img src="/2025/03/21/Note/Hire/Mysql/image.png" alt="可串行化的死锁错误"></p><p>先是两边都加上了s锁，左边想要修改数据，没有权限等待，等待右边退出才能安装排他锁，结果右边也要上排他锁，等待左边退出，直接死锁，右边挂了，左边就执行了。</p><h1 id="sql-调优，除了建立索引还有什么方法"><a href="#sql-调优，除了建立索引还有什么方法" class="headerlink" title="sql 调优，除了建立索引还有什么方法"></a>sql 调优，除了建立索引还有什么方法</h1><h2 id="优化sql语句"><a href="#优化sql语句" class="headerlink" title="优化sql语句"></a>优化sql语句</h2><p>避免使用子查询，使用join替代</p><p>子查询有物化和嵌套，嵌套就是效率最低的，通常这种是因为子查询获取的数据，结构复杂，没利用索引有关</p><p>物化就是子查询的结果放在了一张临时表里，不用多次嵌套查询</p><p>避免select *</p><p>使用索引</p><h2 id="选择合适的数据结构"><a href="#选择合适的数据结构" class="headerlink" title="选择合适的数据结构"></a>选择合适的数据结构</h2><p>使用enum代替string枚举</p><p>使用更小的数据类型</p><p>避免blob(二进制数据)和text(文本数据)类型在频繁查询中出现</p><p>查看慢查询日志，找到性能瓶颈，再针对优化</p><p>使用exlain分析sql语句</p><h1 id="Mysql在哪些情况下索引会失效"><a href="#Mysql在哪些情况下索引会失效" class="headerlink" title="Mysql在哪些情况下索引会失效"></a>Mysql在哪些情况下索引会失效</h1><p>mysql一条sql命令只能高效使用一个索引</p><h2 id="where中or前为索引列or后为非索引列"><a href="#where中or前为索引列or后为非索引列" class="headerlink" title="where中or前为索引列or后为非索引列"></a>where中or前为索引列or后为非索引列</h2><p>SELECT * FROM users WHERE name &#x3D; ‘Tom’ OR email &#x3D; ‘<a href="mailto:&#116;&#x6f;&#109;&#x40;&#x65;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">tom@example.com</a>‘;</p><h2 id="在索引列上进行函数操作"><a href="#在索引列上进行函数操作" class="headerlink" title="在索引列上进行函数操作"></a>在索引列上进行函数操作</h2><p>SELECT * FROM users WHERE YEAR(create_time) &#x3D; 2023;</p><p>因为关于年份没有索引</p><h2 id="对字段进行左模糊匹配-abc"><a href="#对字段进行左模糊匹配-abc" class="headerlink" title="对字段进行左模糊匹配 %abc"></a>对字段进行左模糊匹配 %abc</h2><p>因为索引是按照前缀进行排序的</p><p>但是abc%可以使用索引</p><h2 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a>隐式转换</h2><p>SELECT * FROM users WHERE phone &#x3D; 13800000000;</p><p>phone是varchar</p><p>mysql会将phone转换为数字</p><h2 id="联合索引不符合-最左前缀-原则"><a href="#联合索引不符合-最左前缀-原则" class="headerlink" title="联合索引不符合&#x3D;&#x3D;最左前缀&#x3D;&#x3D;原则"></a>联合索引不符合&#x3D;&#x3D;最左前缀&#x3D;&#x3D;原则</h2><p>假设你有一个联合索引：<code>(name, age, gender)</code></p><table><thead><tr><th>查询语句</th><th>是否使用索引</th></tr></thead><tbody><tr><td><code>WHERE name = &#39;Tom&#39;</code></td><td>✅ 使用</td></tr><tr><td><code>WHERE name = &#39;Tom&#39; AND age = 25</code></td><td>✅ 使用</td></tr><tr><td><code>WHERE age = 25</code></td><td>❌ 不使用</td></tr><tr><td><code>WHERE name = &#39;Tom&#39; AND gender = &#39;男&#39;</code></td><td>✅ 使用（name 是最左）</td></tr><tr><td><code>WHERE age = 25 AND gender = &#39;男&#39;</code></td><td>❌ 不使用</td></tr></tbody></table><h1 id="limit关键字，分页查询"><a href="#limit关键字，分页查询" class="headerlink" title="limit关键字，分页查询"></a>limit关键字，分页查询</h1><p>limit就是限制返回结果条数，offset是从最开始的结果开始的偏移量</p><p>但是在偏移量巨大的时候正常查询效率会非常低</p><p>这时可以使用索引字段做条件过滤</p><p>或者通过子查询索引字段，这样可以快速定位到偏移量位置</p><p>子查询效率也不高，但是如果是物化就还好</p><p>limit 和offset只能用在select主句上</p><h1 id="回表"><a href="#回表" class="headerlink" title="回表"></a>回表</h1><p>回表就是非主键索引的b+树存储的是该键和主键的位置，查找到非主键索引后会再次查询主键索引</p><h1 id="一条sql语句执行过程"><a href="#一条sql语句执行过程" class="headerlink" title="一条sql语句执行过程"></a>一条sql语句执行过程</h1><p>连接建立</p><p>查询缓存，缓存的是sql语句和结果，但是经常命不中，所以mysql8.0弃用了</p><p>解析sql</p><p>执行sql分为</p><p>预处理</p><p>优化</p><h2 id="执行计划优化有哪些"><a href="#执行计划优化有哪些" class="headerlink" title="执行计划优化有哪些"></a>执行计划优化有哪些</h2><p>选择哪条索引</p><p>跟sql语句优化差不多，就是逮着explain分析</p><p>执行</p>]]></content>
     
     
     <categories>
@@ -166,7 +322,7 @@
     <link href="/2025/03/20/Note/C++/pointer/"/>
     <url>/2025/03/20/Note/C++/pointer/</url>
     
-    <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> ** p;<br><span class="hljs-type">int</span> * p1;<br></code></pre></td></tr></table></figure><p>int *可以看成是多个int的数组，因为存储的是int；<br>char ** 可以看成是存储多个char*的数组</p>]]></content>
+    <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> ** p;<br><span class="hljs-type">int</span> * p1;<br></code></pre></td></tr></table></figure><p>int *可以看成是多个int的数组，因为存储的是int；<br>char ** 可以看成是存储多个char*的数组  </p>]]></content>
     
     
     <categories>
@@ -178,61 +334,11 @@
     
     <tags>
       
-      <tag>Pointer</tag>
-      
       <tag>C++</tag>
       
       <tag>Note</tag>
       
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>随笔</title>
-    <link href="/2025/03/19/Leisure/250319/"/>
-    <url>/2025/03/19/Leisure/250319/</url>
-    
-    <content type="html"><![CDATA[<p>感觉确实很无趣呀，没有什么奔头，潦草的活着，还是要找兴趣爱好？<br>现在没有那么难受但是怎么说呢，有点钝刀子割肉的感觉，感觉自己对太多事情无所谓了，老是追寻什么有用呀，一想，基本上都变得无趣起来，还是不能按照有用论这种想法，好像确实所有东西都没用。确实是自己从来不认真对待的问题。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>Leisure</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>complaint</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>20250303</title>
-    <link href="/2025/03/17/Todo/2025_3/3_3/"/>
-    <url>/2025/03/17/Todo/2025_3/3_3/</url>
-    
-    <content type="html"><![CDATA[<h4 id="2025年3月17日"><a href="#2025年3月17日" class="headerlink" title="2025年3月17日"></a>2025年3月17日</h4><h5 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h5><p>今天基本上啥都没干，发现百度网盘的视频播放最高4K也没本地清晰，但是百度网盘有字幕，可以看的更有效率一点，哈哈，搞了一个白天，没弄出来，反正就是试了很多方法，最后没成。</p><ul><li><input checked disabled type="checkbox"> 复习一下英语</li><li><input checked disabled type="checkbox"> 复习C++</li></ul><h4 id="2025年3月18日"><a href="#2025年3月18日" class="headerlink" title="2025年3月18日"></a>2025年3月18日</h4><h5 id="留痕-1"><a href="#留痕-1" class="headerlink" title="留痕"></a>留痕</h5><p>学了一会http，然后就没啥了，换mysql8.0了，等会学点英语，明天好好学。定个大目标，这个星期直接干到项目</p><ul><li><input disabled type="checkbox"> 英语</li><li><input checked disabled type="checkbox"> http</li></ul><h4 id="2025年3月19日"><a href="#2025年3月19日" class="headerlink" title="2025年3月19日"></a>2025年3月19日</h4><h5 id="留痕-2"><a href="#留痕-2" class="headerlink" title="留痕"></a>留痕</h5><p>今天学的不认真，确实语言学习要尽快，一直拖着没心力了。</p><ul><li><input checked disabled type="checkbox"> 英语</li><li><input checked disabled type="checkbox"> mysql</li></ul><h4 id="2025年3月20日"><a href="#2025年3月20日" class="headerlink" title="2025年3月20日"></a>2025年3月20日</h4><h5 id="留痕-3"><a href="#留痕-3" class="headerlink" title="留痕"></a>留痕</h5><p>今天学的还行，gpt有时候真的傻逼。</p><ul><li><input disabled type="checkbox"> 英语</li><li><input checked disabled type="checkbox"> mysql</li></ul><h4 id="2025年3月21日"><a href="#2025年3月21日" class="headerlink" title="2025年3月21日"></a>2025年3月21日</h4><h5 id="留痕-4"><a href="#留痕-4" class="headerlink" title="留痕"></a>留痕</h5><p>学的勉勉强强，主要是又跟windows实时字幕较上劲了，感受到开源的好处了。</p><ul><li><input disabled type="checkbox"> 英语</li><li><input checked disabled type="checkbox"> mysql</li></ul><h4 id="2025年3月22日"><a href="#2025年3月22日" class="headerlink" title="2025年3月22日"></a>2025年3月22日</h4><h5 id="留痕-5"><a href="#留痕-5" class="headerlink" title="留痕"></a>留痕</h5><p>学的还行吧，就晚上跟一个bug死磕，发现是权限问题，我搞了两个多小时。</p><ul><li><input disabled type="checkbox"> 英语</li><li><input checked disabled type="checkbox"> mysql</li></ul><h4 id="2025年3月23日"><a href="#2025年3月23日" class="headerlink" title="2025年3月23日"></a>2025年3月23日</h4><h5 id="留痕-6"><a href="#留痕-6" class="headerlink" title="留痕"></a>留痕</h5><p>玩了一天吧，晚上弄了会作业环境。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>Todo</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Todo</tag>
+      <tag>Pointer</tag>
       
     </tags>
     
@@ -245,7 +351,7 @@
     <link href="/2025/03/15/Note/Net/HTTP/"/>
     <url>/2025/03/15/Note/Net/HTTP/</url>
     
-    <content type="html"><![CDATA[<h1 id="HTTP特点"><a href="#HTTP特点" class="headerlink" title="HTTP特点"></a>HTTP特点</h1><ul><li>C&#x2F;S模型：一次请求必定对应一次访问</li><li>文本协议：传输的都是字符串，可见即所得</li><li>无状态：每一个HTTP请求都是独立的，不依赖于上下文</li><li>可靠：基于TCP连接<br><strong>无状态解释：</strong><br>相比于TCP有状态，TCP需要什么建立连接，断开连接，TIME-WAIT状态，HTTP不需要，也没有。</li></ul><h3 id="提升服务器性能"><a href="#提升服务器性能" class="headerlink" title="提升服务器性能"></a>提升服务器性能</h3><ul><li>垂直扩展：提升服务器硬件设备性能，提升性能有限</li><li>水平扩展：增加服务器(<strong>推荐</strong>)</li></ul><h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><p>三层架构：客户端，服务器，数据库<br>分别代表：视图展示层(view),业务逻辑层(control)，数据持久层(model)不理解为什么叫model</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="HTTP特点"><a href="#HTTP特点" class="headerlink" title="HTTP特点"></a>HTTP特点</h1><ul><li>C&#x2F;S模型：一次请求必定对应一次访问</li><li>文本协议：传输的都是字符串，可见即所得</li><li>无状态：每一个HTTP请求都是独立的，不依赖于上下文</li><li>可靠：基于TCP连接<br><strong>无状态解释：</strong><br>相比于TCP有状态，TCP需要什么建立连接，断开连接，TIME-WAIT状态，HTTP不需要，也没有。</li></ul><h3 id="提升服务器性能"><a href="#提升服务器性能" class="headerlink" title="提升服务器性能"></a>提升服务器性能</h3><ul><li>垂直扩展：提升服务器硬件设备性能，提升性能有限</li><li>水平扩展：增加服务器(<strong>推荐</strong>)<blockquote><p>有状态不支持水平扩展，因为有状态要记录状态，你就算水平扩展也要重新复制一份数据到新机器</p></blockquote></li></ul><h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><p>三层架构：客户端，服务器，数据库<br>分别代表：视图展示层(view),业务逻辑层(control)，数据持久层(model)不理解为什么叫model</p>]]></content>
     
     
     <categories>
@@ -272,7 +378,7 @@
     <link href="/2025/03/14/Note/Hire/Redis/"/>
     <url>/2025/03/14/Note/Hire/Redis/</url>
     
-    <content type="html"><![CDATA[<h1 id="缓存雪崩，击穿，穿透的区别"><a href="#缓存雪崩，击穿，穿透的区别" class="headerlink" title="缓存雪崩，击穿，穿透的区别"></a>缓存雪崩，击穿，穿透的区别</h1><p>雪崩</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">定义：大量热点数据在同一时间段失效<br><br>解决方法：<br>分散这些数据的失效时间<br>延长热点数据的失效时间<br></code></pre></td></tr></table></figure><p>击穿</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs txt">定义：热点数据失效(与雪崩区别在于不关注失效时间)<br><br>解决方法：<br>延长热点数据的失效时间<br>当访问底层数据库使其互斥访问，mysql需要自己设置锁来保持线程安全，因为<br>它是多线程的，redis单线程<br></code></pre></td></tr></table></figure><p>穿透</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs txt">定义：缓存和底层数据库都没有该数据<br>危害：增加底层数据库压力<br>解决方法：<br>缓存里没有访问到就在缓存给他设置一个键值对，值为空<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="Redis为什么快"><a href="#Redis为什么快" class="headerlink" title="Redis为什么快"></a>Redis为什么快</h1><p>所有数据存储在内存，相较于磁盘读写，速度更快</p><p>Redis是个键值存储系统，相较于mysql没有复杂的查询语法，操作更简单所以更快</p><p>Redis使用自定义的文本协议</p><p>Redis使用IO多路复用技术</p><p>除了一些耗时较长的操作都是由主线程串行执行，减少了线程切换的开销</p><p>例如持久化，I&#x2F;O读写，删除大对象</p><h1 id="现在的-redis-还是单线程吗"><a href="#现在的-redis-还是单线程吗" class="headerlink" title="现在的 redis 还是单线程吗"></a>现在的 redis 还是单线程吗</h1><p>主线程负责短命令</p><p>子线程负责长命令</p><p>除了一些耗时较长的操作都是由主线程串行执行，减少了线程切换的开销</p><p>例如持久化，I&#x2F;O读写，删除大对象</p><h1 id="缓存击穿，雪崩，穿透"><a href="#缓存击穿，雪崩，穿透" class="headerlink" title="缓存击穿，雪崩，穿透"></a>缓存击穿，雪崩，穿透</h1><h2 id="雪崩"><a href="#雪崩" class="headerlink" title="雪崩"></a>雪崩</h2><p>大量数据同一时间失效，导致底层数据库压力增大</p><h3 id="措施"><a href="#措施" class="headerlink" title="措施"></a>措施</h3><p>分散热点数据失效时间</p><p>延长失效时间</p><h2 id="击穿"><a href="#击穿" class="headerlink" title="击穿"></a>击穿</h2><p>大量客户端访问&#x3D;&#x3D;同一热点&#x3D;&#x3D;数据，但是这个热点数据确失效了，导致大量客户端访问底层数据库</p><h3 id="措施-1"><a href="#措施-1" class="headerlink" title="措施"></a>措施</h3><p>延长失效时间</p><p>给客户端加锁，错峰访问底层数据库</p><h2 id="穿透"><a href="#穿透" class="headerlink" title="穿透"></a>穿透</h2><p>数据本身就不在&#x3D;&#x3D;缓存和底层数据库&#x3D;&#x3D;里，导致客户端都访问底层数据库，增加底层数据库的访问压力</p><h3 id="措施-2"><a href="#措施-2" class="headerlink" title="措施"></a>措施</h3><p>&#x3D;&#x3D;给这个key在缓存里设个空值&#x3D;&#x3D;</p><h1 id="redis-的基本数据结构"><a href="#redis-的基本数据结构" class="headerlink" title="redis 的基本数据结构"></a>redis 的基本数据结构</h1><p>String</p><p>Hash</p><p>相比较String较为节省内存</p><p>List,Streams适用于存储消息队列</p><p>Set</p><p>支持各种集合操作，并集什么的，无序且Unique</p><p>适合存储用户关注，粉丝列表</p><p>判断是否存在某个元素的时间复杂度为O(1)</p><p>还有排序好的set</p><p>sort set底层是跳表</p><p>set底层是hashtable</p><p>位图</p><p>适合做签到状态</p><p>做网站UV统计，刚好可以用来去重不同用户</p><h1 id="双写不一致"><a href="#双写不一致" class="headerlink" title="双写不一致"></a>双写不一致</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>就比如说你更改了用户名，mysql先做更改，redis随后，但是redis缓存更改失败了，两边数据不一致</p><h2 id="解决措施"><a href="#解决措施" class="headerlink" title="解决措施"></a>解决措施</h2><h3 id="最常用，但是有不一致性的可能"><a href="#最常用，但是有不一致性的可能" class="headerlink" title="最常用，但是有不一致性的可能"></a>最常用，但是有不一致性的可能</h3><h4 id="读流程："><a href="#读流程：" class="headerlink" title="读流程："></a>读流程：</h4><ul><li>查 Redis，命中直接返回</li><li>未命中则查数据库</li><li>写入 Redis 后返回</li></ul><h4 id="写流程："><a href="#写流程：" class="headerlink" title="写流程："></a>写流程：</h4><ul><li><p>删除 Redis 缓存</p></li><li><p>更新数据库</p></li></ul><h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p>将mysql数据库更新后缓存更新两个分开，保证了最终的一致性，但是延迟时间内两个不一致，完成解耦，消息队列也可以起到缓冲的功能，要维护幂等性</p><h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><p>为保持不同微服务之间数据的一致性，可以通过tcc方式来解决，总的来说就是类似于mysql的预编译，先预处理，然后执行，执行储出错就返回开始状态，&#x3D;&#x3D;tcc就是try,confirm,cancel&#x3D;&#x3D;</p><h1 id="redis-的淘汰策略"><a href="#redis-的淘汰策略" class="headerlink" title="redis 的淘汰策略"></a>redis 的淘汰策略</h1><p>不淘汰</p><p>&#x3D;&#x3D;没设置过期时间的&#x3D;&#x3D;</p><p>LRU</p><p>最近最少频率使用</p><p>LFU</p><p>最少频率使用</p><p>&#x3D;&#x3D;设置了过期时间的&#x3D;&#x3D;</p><p>还是LRU和LFU</p><p>还有看剩余过期时间多少的</p><h1 id="redis-的键值对过期策略"><a href="#redis-的键值对过期策略" class="headerlink" title="redis 的键值对过期策略"></a>redis 的键值对过期策略</h1><p>定时检查</p><p>惰性检查</p><p>这种是查询的时候发现你过期了，就把你删了</p><h1 id="redis是不是完全可靠，有没有数据丢失的时候"><a href="#redis是不是完全可靠，有没有数据丢失的时候" class="headerlink" title="redis是不是完全可靠，有没有数据丢失的时候"></a>redis是不是完全可靠，有没有数据丢失的时候</h1><p>不完全可靠</p><p>AOF每一秒存储一次同步一次，可能会丢失一秒的数据，可以设置每次写操作都记录，但是效率低</p><p>rdb也会丢失数据</p><h1 id="RDB和AOF"><a href="#RDB和AOF" class="headerlink" title="RDB和AOF"></a>RDB和AOF</h1><p>RDB快照持久化</p><p>记录的是数据库，比记录操作日志恢复速度快，性能影响较小，子进程写入磁盘</p><p>AOF日志持久化</p><p>记录写操作</p><p>恢复速度慢，一条一条写命令执行，每秒都要写入磁盘</p><h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><p>主节点和从节点通过ping确认对方是否活着</p><p>主节点和从节点通信是长连接</p><p>哨兵机制就跟继位一样，都是选皇上</p><p>主从节点异步复制</p><p>每个节点数据量是一样大的，所以有redis cluster，就是对数据切片</p><p>一般来说主节点负责写命令的执行，从节点负责读命令</p>]]></content>
     
     
     <categories>
@@ -295,36 +401,11 @@
   
   
   <entry>
-    <title>20250302</title>
-    <link href="/2025/03/10/Todo/2025_3/3_2/"/>
-    <url>/2025/03/10/Todo/2025_3/3_2/</url>
-    
-    <content type="html"><![CDATA[<h4 id="2025年3月10日"><a href="#2025年3月10日" class="headerlink" title="2025年3月10日"></a>2025年3月10日</h4><ul><li><input checked disabled type="checkbox"> v2代码理解</li><li><input checked disabled type="checkbox"> C++学习(就学了一点点)</li><li><input disabled type="checkbox"> 英语学习</li><li><input checked disabled type="checkbox"> 软件安全作业</li><li><input checked disabled type="checkbox"> 为什么不能用bind解决Mytask的传参问题</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;functional&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>&#123;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;x: &quot;</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">&quot;, y: &quot;</span> &lt;&lt; y &lt;&lt; std::endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">auto</span> boundFunc = std::<span class="hljs-built_in">bind</span>(func, std::placeholders::_1, <span class="hljs-number">10</span>);<br>    <span class="hljs-built_in">boundFunc</span>(<span class="hljs-number">5</span>); <span class="hljs-comment">// 输出: x: 5, y: 10</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>仔细看这段关于bind的使用，参数绑定的前提是函数有这个参数，如果数量不对编译不会通过</p><h6 id="之前的任务"><a href="#之前的任务" class="headerlink" title="之前的任务"></a>之前的任务</h6><ul><li><input checked disabled type="checkbox"> revactorV2在处理conned时不在ep范围内的处理感觉不对</li></ul><p>这个的解释是其实是在ep范围内的，只是加入的时当时没看到</p><ul><li><input checked disabled type="checkbox"> fd和tcp链接的键值对感觉没有必要</li></ul><p>如果你是想要在EventLoop类中执行关于读写数据的话确实没有必要，但是如果这样子的话那TcpConnection就没有存在的必要了，本来就是想要解耦，把执行数据处理，连接具体操作的工作交给TcpConnection</p><h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>今天干的活都比较琐碎，也不能讲没学，只能说学的不多不少，发现VSCode的终端可以直接建立一个窗口，我都搞不懂要xshell干嘛，哈哈。明天加油！</p><h4 id="2025年3月11日"><a href="#2025年3月11日" class="headerlink" title="2025年3月11日"></a>2025年3月11日</h4><ul><li><input checked disabled type="checkbox"> C++学习，争取把Reactor学完(没学完)</li><li><input disabled type="checkbox"> 英语学习</li></ul><h5 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h5><p>学了一点关于多线程调试代码</p><h4 id="2025年3月12日"><a href="#2025年3月12日" class="headerlink" title="2025年3月12日"></a>2025年3月12日</h4><ul><li><input checked disabled type="checkbox"> C++学习</li><li><input checked disabled type="checkbox"> 英语学习(以后就是英语文档看半个小时，单词复习半个小时)</li><li><input checked disabled type="checkbox"> 仔细过一下多线程代码调试</li><li><input checked disabled type="checkbox"> 了解一下关于竞赛方面的</li></ul><h4 id="2025年3月13日"><a href="#2025年3月13日" class="headerlink" title="2025年3月13日"></a>2025年3月13日</h4><ul><li><input checked disabled type="checkbox"> C++学习</li><li><input checked disabled type="checkbox"> 英语学习</li><li><input checked disabled type="checkbox"> 软件安全作业</li></ul><h4 id="2025年3月14日"><a href="#2025年3月14日" class="headerlink" title="2025年3月14日"></a>2025年3月14日</h4><ul><li><input checked disabled type="checkbox"> C++学习</li><li><input disabled type="checkbox"> 英语学习</li></ul><h4 id="2025年3月15日"><a href="#2025年3月15日" class="headerlink" title="2025年3月15日"></a>2025年3月15日</h4><ul><li><input disabled type="checkbox"> 线程池工作原理详细分析</li><li><input checked disabled type="checkbox"> C++学习</li><li><input checked disabled type="checkbox"> 英语学习(就复习了一下单词)</li></ul><h4 id="2025年3月16日"><a href="#2025年3月16日" class="headerlink" title="2025年3月16日"></a>2025年3月16日</h4><ul><li><input checked disabled type="checkbox"> 线程池工作原理详细分析</li><li><input disabled type="checkbox"> 逆向工程作业(不想写，逆向工程给我搞个XSS注入，还麻烦的要死)</li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>Todo</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Todo</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>VSCode Reference</title>
     <link href="/2025/03/05/reference/VSCode/"/>
     <url>/2025/03/05/reference/VSCode/</url>
     
-    <content type="html"><![CDATA[<h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><p>ctrl+g输入行号跳转<br>alt+左回退<br>alt+右前进</p><h1 id="Git操作"><a href="#Git操作" class="headerlink" title="Git操作"></a>Git操作</h1><p>更改撤销就是撤销到暂存更改里文件的状态，如果暂存区没有该文件，<br>就删除该文件</p><p>你提交过后，每一次提交就相当于更新暂存区</p><p>总的来说，暂存更改是一个仓库，commit也是也个仓库，最多可以有<br>两个仓库，优先级是commit仓库大于暂存仓库大于文件夹文件</p><h1 id="VSCode关于自动补全时Enter换行和选中的冲突问题"><a href="#VSCode关于自动补全时Enter换行和选中的冲突问题" class="headerlink" title="VSCode关于自动补全时Enter换行和选中的冲突问题"></a>VSCode关于自动补全时Enter换行和选中的冲突问题</h1><p>VSCode的自动补全方式确实感觉很逆天，我<strong>实现的效果</strong>就是<br><strong>出现代码提示时按下Enter键不会进行补全而是会换行,只有使用Tab选中的情况下才会补全。Tab是用来上下移动选中补全代码的。</strong></p><p>下面具体讲怎么实现的</p><p>开启设置里面的Editor: Accept Suggestion On Enter，别的文章我看都不开启，哈哈</p><p><img src="/2025/03/05/reference/VSCode/image.png" alt="Editor: Accept Suggestion On Enter"></p><p>editor.suggest.selectionMode选择never，这样补全代码出现时默认就不会选中</p><p><img src="/2025/03/05/reference/VSCode/image-1.png" alt="editor.suggest.selectionMode"></p><p>如何选中就靠Tab键了，先把Tab选中关了，Editor: Tab Completion</p><p><img src="/2025/03/05/reference/VSCode/image-2.png" alt="Editor: Tab Completion"></p><p>然后再设置一下Tab的行为就行了，在keybindings.json里设置</p><p><img src="/2025/03/05/reference/VSCode/image-3.png" alt="keybindings.json"></p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tab&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;selectNextSuggestion&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;suggestWidgetVisible&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shift+tab&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;selectPrevSuggestion&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;suggestWidgetVisible&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure><p>ok了。</p><h1 id="VSCode解决git的SSH和Windows与Ubuntu的ssh冲突"><a href="#VSCode解决git的SSH和Windows与Ubuntu的ssh冲突" class="headerlink" title="VSCode解决git的SSH和Windows与Ubuntu的ssh冲突"></a>VSCode解决git的SSH和Windows与Ubuntu的ssh冲突</h1><p>因为本地git要和github做一条ssh连接认证，我本地VSCode又要和虚拟机进行ssh连接，所以两者默认会有冲突</p><p>我的解决方法就是在ssh配置文件中改变ubuntu的ssh默认连接文件</p><p>我默认你git连接是对的，要是不对，就先把这个目录删除，C:\Users\用户名.ssh，然后优先配置git的ssh连接，然后再跟我搞虚拟机。</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">ssh-keygen -t rsa -f C:\Users\YourUsername\.ssh\id_rsa_ubuntu<br>#这是windows命令框<br></code></pre></td></tr></table></figure><p>写了一半发现好简单，上面的这些都是跟正常的差不多，只要你生成的文件不是默认的id_rsa，再在config文件里加上下面的这些配置就行了</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">Host Ubuntu<br>    HostName 192.168.40.137<br>    Port 22<br>    User test<br>    IdentityFile C:\Users\用户名\.ssh\id_rsa_ubuntu<br></code></pre></td></tr></table></figure><h1 id="VSCode多线程调试-C-C-程序"><a href="#VSCode多线程调试-C-C-程序" class="headerlink" title="VSCode多线程调试(C&#x2F;C++程序)"></a>VSCode多线程调试(C&#x2F;C++程序)</h1><p>我的环境：windowsVSCode远程ssh连接Ubuntu虚拟机，CMakeTools配置设为<strong>GCC</strong></p><p><img src="/2025/03/05/reference/VSCode/image-5.png" alt="CMakeTools配置gcc"></p><p><strong>实现的效果类似于只执行当前线程，其他线程暂时不运行</strong></p><p>多线程调试命令：</p><p>需要在调试控制台的命令行中执行</p><p><img src="/2025/03/05/reference/VSCode/image-4.png" alt="多线程调试命令"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">-<span class="hljs-built_in">exec</span> info threads<br><span class="hljs-comment">#展示当前所有线程</span><br>-<span class="hljs-built_in">exec</span> thread 1<br><span class="hljs-comment">#切换至线程1</span><br>-<span class="hljs-built_in">exec</span> thread 2<br><span class="hljs-comment">#切换至线程2</span><br>-<span class="hljs-built_in">exec</span> <span class="hljs-built_in">set</span> scheduler-locking on<br><span class="hljs-comment">#锁定当前线程</span><br>-<span class="hljs-built_in">exec</span> <span class="hljs-built_in">set</span> scheduler-locking off<br><span class="hljs-comment">#取消锁定当前线程</span><br></code></pre></td></tr></table></figure><p>图中线程id就是1和2，当前线程id为1，切换至线程2，然后锁定当前线程(线程2)，线程1就暂时不运行了，就可以单独调试线程2，调试代码片段完成后，解除锁定线程2，线程1和线程2就能正常运行，不会对其造成影响</p><p><img src="/2025/03/05/reference/VSCode/image-6.png" alt="调试截图"></p><p>最近又看到两个博客，都是关于gdb调试的，VSCode中调试窗口命令行的功能其实也就是运行gdb命令</p><p><a href="https://blog.csdn.net/weixin_42158742/article/details/113100151">GDB多线程调试</a></p><p><a href="https://blog.csdn.net/weixin_42158742/article/details/113100063">GDB多进程调试</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><p>ctrl+g输入行号跳转<br>alt+左回退<br>alt+右前进</p><h1 id="Git操作"><a href="#Git操作" class="headerlink" title="Git操作"></a>Git操作</h1><p>更改撤销就是撤销到暂存更改里文件的状态，如果暂存区没有该文件，<br>就删除该文件</p><p>你提交过后，每一次提交就相当于更新暂存区</p><p>总的来说，暂存更改是一个仓库，commit也是也个仓库，最多可以有<br>两个仓库，优先级是commit仓库大于暂存仓库大于文件夹文件</p><h1 id="VSCode关于自动补全时Enter换行和选中的冲突问题"><a href="#VSCode关于自动补全时Enter换行和选中的冲突问题" class="headerlink" title="VSCode关于自动补全时Enter换行和选中的冲突问题"></a>VSCode关于自动补全时Enter换行和选中的冲突问题</h1><p>VSCode的自动补全方式确实感觉很逆天，我<strong>实现的效果</strong>就是<br><strong>出现代码提示时按下Enter键不会进行补全而是会换行,只有使用Tab选中的情况下才会补全。Tab是用来上下移动选中补全代码的。</strong></p><p>下面具体讲怎么实现的</p><p>开启设置里面的Editor: Accept Suggestion On Enter，别的文章我看都不开启，哈哈</p><p><img src="/2025/03/05/reference/VSCode/image.png" alt="Editor: Accept Suggestion On Enter"></p><p>editor.suggest.selectionMode选择never，这样补全代码出现时默认就不会选中</p><p><img src="/2025/03/05/reference/VSCode/image-1.png" alt="editor.suggest.selectionMode"></p><p>如何选中就靠Tab键了，先把Tab选中关了，Editor: Tab Completion</p><p><img src="/2025/03/05/reference/VSCode/image-2.png" alt="Editor: Tab Completion"></p><p>然后再设置一下Tab的行为就行了，在keybindings.json里设置</p><p><img src="/2025/03/05/reference/VSCode/image-3.png" alt="keybindings.json"></p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tab&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;selectNextSuggestion&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;suggestWidgetVisible&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shift+tab&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;selectPrevSuggestion&quot;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;suggestWidgetVisible&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure><p>ok了。</p><h1 id="VSCode解决git的SSH和Windows与Ubuntu的ssh冲突"><a href="#VSCode解决git的SSH和Windows与Ubuntu的ssh冲突" class="headerlink" title="VSCode解决git的SSH和Windows与Ubuntu的ssh冲突"></a>VSCode解决git的SSH和Windows与Ubuntu的ssh冲突</h1><p>因为本地git要和github做一条ssh连接认证，我本地VSCode又要和虚拟机进行ssh连接，所以两者默认会有冲突</p><p>我的解决方法就是在ssh配置文件中改变ubuntu的ssh默认连接文件</p><p>我默认你git连接是对的，要是不对，就先把这个目录删除，C:\Users\用户名.ssh，然后优先配置git的ssh连接，然后再跟我搞虚拟机。</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmd">ssh-keygen -t rsa -f C:\Users\YourUsername\.ssh\id_rsa_ubuntu<br>#这是windows命令框<br></code></pre></td></tr></table></figure><p>写了一半发现好简单，上面的这些都是跟正常的差不多，只要你生成的文件不是默认的id_rsa，再在config文件里加上下面的这些配置就行了</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">Host Ubuntu<br>    HostName 192.168.40.137<br>    Port 22<br>    User test<br>    IdentityFile C:\Users\用户名\.ssh\id_rsa_ubuntu<br></code></pre></td></tr></table></figure><h1 id="VSCode多线程调试-C-C-程序"><a href="#VSCode多线程调试-C-C-程序" class="headerlink" title="VSCode多线程调试(C&#x2F;C++程序)"></a>VSCode多线程调试(C&#x2F;C++程序)</h1><p>我的环境：windowsVSCode远程ssh连接Ubuntu虚拟机，CMakeTools配置设为<strong>GCC</strong></p><p><img src="/2025/03/05/reference/VSCode/image-5.png" alt="CMakeTools配置gcc"></p><p><strong>实现的效果类似于只执行当前线程，其他线程暂时不运行</strong></p><p>多线程调试命令：</p><p>需要在调试控制台的命令行中执行</p><p><img src="/2025/03/05/reference/VSCode/image-4.png" alt="多线程调试命令"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">-<span class="hljs-built_in">exec</span> info threads<br><span class="hljs-comment">#展示当前所有线程</span><br>-<span class="hljs-built_in">exec</span> thread 1<br><span class="hljs-comment">#切换至线程1</span><br>-<span class="hljs-built_in">exec</span> thread 2<br><span class="hljs-comment">#切换至线程2</span><br>-<span class="hljs-built_in">exec</span> <span class="hljs-built_in">set</span> scheduler-locking on<br><span class="hljs-comment">#锁定当前线程</span><br>    -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">set</span> scheduler-locking off<br><span class="hljs-comment">#取消锁定当前线程</span><br></code></pre></td></tr></table></figure><p>图中线程id就是1和2，当前线程id为1，切换至线程2，然后锁定当前线程(线程2)，线程1就暂时不运行了，就可以单独调试线程2，调试代码片段完成后，解除锁定线程2，线程1和线程2就能正常运行，不会对其造成影响</p><p><img src="/2025/03/05/reference/VSCode/image-6.png" alt="调试截图"></p><p>最近又看到两个博客，都是关于gdb调试的，VSCode中调试窗口命令行的功能其实也就是运行gdb命令</p><p><a href="https://blog.csdn.net/weixin_42158742/article/details/113100151">GDB多线程调试</a></p><p><a href="https://blog.csdn.net/weixin_42158742/article/details/113100063">GDB多进程调试</a></p>]]></content>
     
     
     <categories>
@@ -336,36 +417,11 @@
     
     <tags>
       
+      <tag>Reference</tag>
+      
       <tag>git</tag>
       
       <tag>VSCode</tag>
-      
-      <tag>Reference</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>20250301</title>
-    <link href="/2025/03/05/Todo/2025_3/3_1/"/>
-    <url>/2025/03/05/Todo/2025_3/3_1/</url>
-    
-    <content type="html"><![CDATA[<h5 id="2025年3月5日"><a href="#2025年3月5日" class="headerlink" title="2025年3月5日"></a>2025年3月5日</h5><ul><li><input checked disabled type="checkbox"> VSCode的Git操作</li><li><input checked disabled type="checkbox"> CMake配合VSCode使用</li></ul><p>找到个学习单词的网站，感觉还不错，充了一年的会员，就36，可能没啥时间完成任务了，现在是20点20分</p><h5 id="2025年3月7日"><a href="#2025年3月7日" class="headerlink" title="2025年3月7日"></a>2025年3月7日</h5><p>完成了3月5号的任务，确实没有玩，就是老是碰到一些问题需要解决，可能还是对VSCode不太熟悉。这两天学的也不少，就是没怎么碰C++，以后我做了那些事就叫做留痕吧。</p><h6 id="留痕"><a href="#留痕" class="headerlink" title="留痕"></a>留痕</h6><ul><li>VSCode免密登录ssh</li><li>解决了VSCode中Tab键和Enter键的冲突</li><li>解决关于ssh和git的id_rsa冲突问题</li></ul><p>好像没啥了，哈哈</p><ul><li><input checked disabled type="checkbox"> 从github上找一段文字，然后找一些不会的单词记到单词本上，<a href="https://code.visualstudio.com/updates/v1_98#_enhanced-fig-completion-support">VSCode英语学习</a></li><li><input disabled type="checkbox"> C++学习</li><li><input disabled type="checkbox"> CMake学习</li><li><input checked disabled type="checkbox"> 替换博客图片和文字</li></ul><h4 id="2025年3月8日"><a href="#2025年3月8日" class="headerlink" title="2025年3月8日"></a>2025年3月8日</h4><p>今天也没干啥，我想实现统计网页浏览量这个功能差点没把我搞死，我靠，中午1点才去吃饭，昨天虽然没做这个功能，但是昨天我也是晚上9点半才吃饭的，当时头晕的受不了，今天中午也头晕的受不了，然后博客差不多就算完结了，评论弄好了，关于页面也写了，本来还想着让谷歌收录，但我看搞得太麻烦了，以后有钱了直接搞个服务器把我的代码弄上去，反正核心代码都在我这不需要改动什么，到时候收录应该好弄了，具体我也不知道，反正我github上是能搜到我的博客代码的，就是不起眼。音乐播放器的功能我看了一圈没有能像网易云那样的，或者稍微差一点的，连我本地的vlc播放器都不如，还不如不搞了，别的乱七八糟的功能都没啥用，不知道咋搞的，电脑屏幕偶尔闪一下，昨天闪的多，今天闪了两次。</p><p>今天翻博客也认识了一些有趣的人。</p><h5 id="留痕-18点05分"><a href="#留痕-18点05分" class="headerlink" title="留痕(18点05分)"></a>留痕(18点05分)</h5><ul><li><p>完成了博客的评论功能</p></li><li><p><input checked disabled type="checkbox"> C++学习</p></li><li><p><input checked disabled type="checkbox"> 英语学习<a href="https://code.visualstudio.com/updates/v1_98#_detailed-command-completions">VSCode博客学习</a></p></li><li><p><input disabled type="checkbox"> 有时间再学CMake</p></li></ul><p>现在是21点08分，然后制定一下明天的任务，明天这些任务完成的话，可以看自己想做啥做啥</p><ul><li><input checked disabled type="checkbox"> 完成ReactV2的代码</li></ul><p>现在时间是21点34分，完成是完成了，细节还没懂，但是框架懂了，熟悉了一下VSCode编写代码，今天确实没学啥，花了4，5个小时敲代码，然后<br>那个源代码误导我，我靠，函数名一样的，我以为又是那种基于对象的编程，然后想着怎么引用，结果这两个基本上没啥关系，也是我没学到位</p><ul><li><input checked disabled type="checkbox"> 解决之前typora笔记上的疑惑(过期)</li><li><input disabled type="checkbox"> 搞懂群友之前提的问题(这个涉及到C++20了，目前跟我没太大关系)</li><li><input checked disabled type="checkbox"> 了解一下多线程和网络程序怎么调试代码(这个就跟正常调试差不多，反正网络调试是这样的)(过期)</li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>Todo</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Todo</tag>
       
     </tags>
     
