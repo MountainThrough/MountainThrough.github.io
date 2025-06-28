@@ -19,26 +19,24 @@
   <meta name="author" content="Through Mountain">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Http和Tcp区别tcp是传输层，端到端协议，不加密，流式传输，传输无状态，连接有状态，三次握手四次挥手，数据单位是字节流，连接可靠 http是应用层协议，数据单位是请求响应，基于tcp，无状态，就是说上一次发送的http连接对下一次发送得到的响应没有影响，http本身是无状态的，但是一些机制会让它看起来有状态 客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢tcp是0到无数个，">
+    <meta name="description" content="几十亿个数找一个数出现2次怎么找使用bitmap，然后出现两次就用2b存储 bitmap就是类似，假如我现在有123456789，9个数 然后二进制10000000表示1 二进制01000000表示2就这样表示，我就只需要9b就可以表示正常来说36B的数据,但是这个是来按&#x3D;&#x3D;最大数&#x3D;&#x3D;决定的 假如40个亿数就是4x10^9约等于2^32,一个int位图能够表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Net Note">
-<meta property="og:url" content="https://mountainthrough.github.io/2025/06/28/Note/Hire/Net/index.html">
+<meta property="og:title" content="Algorithm Note">
+<meta property="og:url" content="https://mountainthrough.github.io/2025/05/09/Note/Hire/Algorithm/index.html">
 <meta property="og:site_name" content="越过山丘">
-<meta property="og:description" content="Http和Tcp区别tcp是传输层，端到端协议，不加密，流式传输，传输无状态，连接有状态，三次握手四次挥手，数据单位是字节流，连接可靠 http是应用层协议，数据单位是请求响应，基于tcp，无状态，就是说上一次发送的http连接对下一次发送得到的响应没有影响，http本身是无状态的，但是一些机制会让它看起来有状态 客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢tcp是0到无数个，">
+<meta property="og:description" content="几十亿个数找一个数出现2次怎么找使用bitmap，然后出现两次就用2b存储 bitmap就是类似，假如我现在有123456789，9个数 然后二进制10000000表示1 二进制01000000表示2就这样表示，我就只需要9b就可以表示正常来说36B的数据,但是这个是来按&#x3D;&#x3D;最大数&#x3D;&#x3D;决定的 假如40个亿数就是4x10^9约等于2^32,一个int位图能够表">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mountainthrough.github.io/2025/06/28/Note/Hire/Net/image.png">
-<meta property="article:published_time" content="2025-06-28T12:48:38.000Z">
-<meta property="article:modified_time" content="2025-06-28T12:55:31.681Z">
+<meta property="article:published_time" content="2025-05-09T02:20:15.000Z">
+<meta property="article:modified_time" content="2025-06-28T13:00:43.510Z">
 <meta property="article:author" content="Through Mountain">
-<meta property="article:tag" content="Net">
+<meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://mountainthrough.github.io/2025/06/28/Note/Hire/Net/image.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Net Note - 越过山丘</title>
+  <title>Algorithm Note - 越过山丘</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Net Note"></span>
+            <span id="subtitle" data-typed-text="Algorithm Note"></span>
           
         </div>
 
@@ -215,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-06-28 20:48" pubdate>
-          2025年6月28日 晚上
+        <time datetime="2025-05-09 10:20" pubdate>
+          2025年5月9日 上午
         </time>
       </span>
     
@@ -227,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          560 字
+          295 字
         
       </span>
     
@@ -238,7 +236,7 @@
         
         
         
-          5 分钟
+          3 分钟
         
       </span>
     
@@ -275,32 +273,24 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Net Note</h1>
+            <h1 id="seo-header">Algorithm Note</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Http和Tcp区别"><a href="#Http和Tcp区别" class="headerlink" title="Http和Tcp区别"></a>Http和Tcp区别</h1><p>tcp是传输层，端到端协议，不加密，流式传输，传输无状态，连接有状态，三次握手四次挥手，数据单位是字节流，连接可靠</p>
-<p>http是应用层协议，数据单位是请求响应，基于tcp，无状态，就是说上一次发送的http连接对下一次发送得到的响应没有影响，http本身是无状态的，但是一些机制会让它看起来有状态</p>
-<h1 id="客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢"><a href="#客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢" class="headerlink" title="客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢"></a>客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢</h1><p>tcp是0到无数个，无数个这种情况是某个包服务端没收到，然后触发客户端重传，但是服务端仍不返回ack,但是你要严格说客户端至始至终都发了三个包的话，那么服务端只能接收0到三个包，少于三个都是丢包的情况</p>
-<p>udp这种就是0到3个，因为没有重传机制</p>
-<h1 id="TCP协议如何保证可靠"><a href="#TCP协议如何保证可靠" class="headerlink" title="TCP协议如何保证可靠"></a>TCP协议如何保证可靠</h1><p>超时重传</p>
-<p>拥塞控制</p>
-<p>ack,seq</p>
-<p>三次握手四次挥手</p>
-<p>滑动窗口，允许一次接收的包个数</p>
-<h1 id="HTTP和TCP的keepalive有什么区别"><a href="#HTTP和TCP的keepalive有什么区别" class="headerlink" title="HTTP和TCP的keepalive有什么区别"></a>HTTP和TCP的keepalive有什么区别</h1><p>tcp的keepalive主要用于检测tcp连接是否断开</p>
-<p>http的keepalive代表要复用这个tcp连接</p>
-<p>两者可以共存</p>
-<h1 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h1><h2 id="TCP为什么开始发送速率比较低"><a href="#TCP为什么开始发送速率比较低" class="headerlink" title="TCP为什么开始发送速率比较低"></a>TCP为什么开始发送速率比较低</h2><p>因为开始的时候拥塞窗口较小，随着数据包的发送，拥塞窗口变大，发送速率变快</p>
-<h3 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h3><p>拥塞窗口指数增长，到达阈值就会进入拥塞避免状态</p>
-<h3 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h3><p>拥塞窗口线性增长</p>
-<h3 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h3><p>长时间没有收到ack，触发重传，进入慢启动</p>
-<h3 id="快恢复"><a href="#快恢复" class="headerlink" title="快恢复"></a>快恢复</h3><p>拥塞窗口变为当前一半，阈值变为当前+3，还是拥塞避免状态</p>
-<h3 id="快重传"><a href="#快重传" class="headerlink" title="快重传"></a>快重传</h3><p>收到超过三个ack就直接重传，不再等待超时，触发快恢复</p>
-<p><img src="/2025/06/28/Note/Hire/Net/image.png" srcset="/img/loading.gif" lazyload alt="image"></p>
-<h1 id="TCP释放连接中的2TSL的作用是什么"><a href="#TCP释放连接中的2TSL的作用是什么" class="headerlink" title="TCP释放连接中的2TSL的作用是什么"></a>TCP释放连接中的2TSL的作用是什么</h1><p>用来保证对方收到消息，如果没有收到消息，对面会发送fin,然后我方发送ack,避免对方一直处于last_ack状态</p>
-<p>tsl是一个tcp报文能存活的最长时间，通常为30s</p>
+                <h1 id="几十亿个数找一个数出现2次怎么找"><a href="#几十亿个数找一个数出现2次怎么找" class="headerlink" title="几十亿个数找一个数出现2次怎么找"></a>几十亿个数找一个数出现2次怎么找</h1><p>使用bitmap，然后出现两次就用2b存储</p>
+<p>bitmap就是类似，假如我现在有123456789，9个数</p>
+<p>然后二进制10000000表示1</p>
+<p>二进制01000000表示2就这样表示，我就只需要9b就可以表示正常来说36B的数据,但是这个是来按&#x3D;&#x3D;最大数&#x3D;&#x3D;决定的</p>
+<p>假如40个亿数就是4x10^9约等于2^32,一个int位图能够表示32个数，就是128M个int，就是512MB，但是表示2次出现就要1GB，因为这个bitmap能表示2^32个数，所以不会有超出范围的风险，因为最大也就是2^32-1</p>
+<h1 id="说三种排序算法复杂度"><a href="#说三种排序算法复杂度" class="headerlink" title="说三种排序算法复杂度"></a>说三种排序算法复杂度</h1><h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>时间复杂度为O(n^2)</p>
+<p>空间复杂度为O(1),原地排序</p>
+<h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>时间复杂度为O(nlogn)</p>
+<p>空间复杂度O(logn)，递归栈</p>
+<p>快排不稳定，因为基数会跳跃</p>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>时间复杂度为O(nlogn)</p>
+<p>空间复杂度为O(n)，因为需要一个相同长度数组辅助排序</p>
+<h2 id="什么是排序算法的稳定性？"><a href="#什么是排序算法的稳定性？" class="headerlink" title="什么是排序算法的稳定性？"></a>什么是排序算法的稳定性？</h2><p>就是相同元素的顺序有没有变</p>
 
                 
               </div>
@@ -334,7 +324,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Net/" class="print-no-link">#Net</a>
+        <a href="/tags/Algorithm/" class="print-no-link">#Algorithm</a>
       
     </div>
   
@@ -346,8 +336,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Net Note</div>
-      <div>https://mountainthrough.github.io/2025/06/28/Note/Hire/Net/</div>
+      <div>Algorithm Note</div>
+      <div>https://mountainthrough.github.io/2025/05/09/Note/Hire/Algorithm/</div>
     </div>
     <div class="license-meta">
       
@@ -359,7 +349,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年6月28日</div>
+          <div>2025年5月9日</div>
         </div>
       
       
@@ -391,9 +381,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/28/Note/Hire/Project/" title="Project Note">
+                      <a href="/2025/05/09/Note/Hire/System/" title="System Note">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Project Note</span>
+                        <span class="hidden-mobile">System Note</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -401,8 +391,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/28/Note/Hire/C++/" title="C++ Note">
-                        <span class="hidden-mobile">C++ Note</span>
+                      <a href="/2025/04/29/reference/Consul/" title="Consul">
+                        <span class="hidden-mobile">Consul</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

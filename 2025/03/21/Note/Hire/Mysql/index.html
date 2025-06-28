@@ -302,7 +302,7 @@
 <p>查看慢查询日志，找到性能瓶颈，再针对优化</p>
 <p>使用exlain分析sql语句</p>
 <h1 id="Mysql在哪些情况下索引会失效"><a href="#Mysql在哪些情况下索引会失效" class="headerlink" title="Mysql在哪些情况下索引会失效"></a>Mysql在哪些情况下索引会失效</h1><p>mysql一条sql命令只能高效使用一个索引</p>
-<h2 id="where中or前为索引列or后为非索引列"><a href="#where中or前为索引列or后为非索引列" class="headerlink" title="where中or前为索引列or后为非索引列"></a>where中or前为索引列or后为非索引列</h2><p>SELECT * FROM users WHERE name &#x3D; ‘Tom’ OR email &#x3D; ‘<a href="mailto:&#116;&#x6f;&#109;&#x40;&#x65;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">tom@example.com</a>‘;</p>
+<h2 id="where中or前为索引列or后为非索引列"><a href="#where中or前为索引列or后为非索引列" class="headerlink" title="where中or前为索引列or后为非索引列"></a>where中or前为索引列or后为非索引列</h2><p>SELECT * FROM users WHERE name &#x3D; ‘Tom’ OR email &#x3D; ‘<a href="mailto:&#x74;&#111;&#x6d;&#64;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;">tom@example.com</a>‘;</p>
 <h2 id="在索引列上进行函数操作"><a href="#在索引列上进行函数操作" class="headerlink" title="在索引列上进行函数操作"></a>在索引列上进行函数操作</h2><p>SELECT * FROM users WHERE YEAR(create_time) &#x3D; 2023;</p>
 <p>因为关于年份没有索引</p>
 <h2 id="对字段进行左模糊匹配-abc"><a href="#对字段进行左模糊匹配-abc" class="headerlink" title="对字段进行左模糊匹配 %abc"></a>对字段进行左模糊匹配 %abc</h2><p>因为索引是按照前缀进行排序的</p>
@@ -445,9 +445,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/08/Note/C++/Trycatch/" title="C++错误处理机制">
+                      <a href="/2025/03/28/Note/Hire/Project/" title="Project Note">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++错误处理机制</span>
+                        <span class="hidden-mobile">Project Note</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
