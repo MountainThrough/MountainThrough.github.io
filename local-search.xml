@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>defer note</title>
+    <link href="/2025/12/19/Note/Go/Sync/defer/"/>
+    <url>/2025/12/19/Note/Go/Sync/defer/</url>
+    
+    <content type="html"><![CDATA[<p>今天我看defer的执行顺序有点让人迷惑<br>其实就是传参的问题，我想复杂了</p><h2 id><a href="#" class="headerlink" title></a></h2><p>特性一<br><strong>defer的函数如果接收参数，那defer执行时就是用的传参时候的值</strong></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">x := <span class="hljs-number">10</span><br><span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a <span class="hljs-type">int</span>)</span></span> &#123;<br>fmt.Println(a)<br>&#125;(x)<br>x++<br></code></pre></td></tr></table></figure><p><strong>没有接收参数的话，那么defer使用主函数的变量的值都是return语句后变量的值</strong></p><h2 id="-1"><a href="#-1" class="headerlink" title></a></h2><p>特性二<br><strong>改变返回值</strong><br>go中的return语句并不是原子性操作，一般是分为两步:<br>将返回值赋值给一个变量<br>执行RET指令。<br>defer就执行在1之后，2之前。<br>所以defer能够改变<strong>返回值</strong></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>(x <span class="hljs-type">int</span>)  &#123;<br> x = <span class="hljs-number">10</span><br> <span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br> x++<br> &#125;()<br> <span class="hljs-keyword">return</span> x<br>&#125;<br></code></pre></td></tr></table></figure><p>返回值就是11</p><h2 id="-2"><a href="#-2" class="headerlink" title></a></h2><p>特性三<br><strong>只defer最外层函数</strong></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">addOne</span><span class="hljs-params">(x <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>fmt.Println(<span class="hljs-string">&quot;addOne被调用，参数：&quot;</span>, x)<br><span class="hljs-keyword">return</span> x + <span class="hljs-number">1</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestDraft</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>a := <span class="hljs-number">5</span><br><span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;defer执行：&quot;</span>, addOne(a))<br>a = <span class="hljs-number">10</span><br>fmt.Println(<span class="hljs-string">&quot;主函数执行：&quot;</span>, a)<br>&#125;<br></code></pre></td></tr></table></figure><p>执行结果是</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs txt">addOne被调用，参数： 5<br>主函数执行： 10<br>defer执行： 6<br></code></pre></td></tr></table></figure><p>addOne函数被立即执行<br>println函数正常defer<br>defer会计算所有函数参数</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Note</tag>
+      
+      <tag>Go</tag>
+      
+      <tag>Sync</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Net Note</title>
     <link href="/2025/05/13/Note/Hire/Net/"/>
     <url>/2025/05/13/Note/Hire/Net/</url>

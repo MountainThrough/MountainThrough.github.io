@@ -19,26 +19,26 @@
   <meta name="author" content="Through Mountain">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Http和Tcp区别tcp是传输层，端到端协议，不加密，流式传输，传输无状态，连接有状态，三次握手四次挥手，数据单位是字节流，连接可靠 http是应用层协议，数据单位是请求响应，基于tcp，无状态，就是说上一次发送的http连接对下一次发送得到的响应没有影响，http本身是无状态的，但是一些机制会让它看起来有状态 客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢tcp是0到无数个，">
+    <meta name="description" content="今天我看defer的执行顺序有点让人迷惑其实就是传参的问题，我想复杂了 特性一defer的函数如果接收参数，那defer执行时就是用的传参时候的值 12345x :&#x3D; 10defer func(a int) &#123;	fmt.Println(a)&#125;(x)x++ 没有接收参数的话，那么defer使用主函数的变量的值都是return语句后变量的值 特性二改变返回值go中的return语句">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Net Note">
-<meta property="og:url" content="https://mountainthrough.github.io/2025/05/13/Note/Hire/Net/index.html">
+<meta property="og:title" content="defer note">
+<meta property="og:url" content="https://mountainthrough.github.io/2025/12/19/Note/Go/Sync/defer/index.html">
 <meta property="og:site_name" content="越过山丘">
-<meta property="og:description" content="Http和Tcp区别tcp是传输层，端到端协议，不加密，流式传输，传输无状态，连接有状态，三次握手四次挥手，数据单位是字节流，连接可靠 http是应用层协议，数据单位是请求响应，基于tcp，无状态，就是说上一次发送的http连接对下一次发送得到的响应没有影响，http本身是无状态的，但是一些机制会让它看起来有状态 客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢tcp是0到无数个，">
+<meta property="og:description" content="今天我看defer的执行顺序有点让人迷惑其实就是传参的问题，我想复杂了 特性一defer的函数如果接收参数，那defer执行时就是用的传参时候的值 12345x :&#x3D; 10defer func(a int) &#123;	fmt.Println(a)&#125;(x)x++ 没有接收参数的话，那么defer使用主函数的变量的值都是return语句后变量的值 特性二改变返回值go中的return语句">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mountainthrough.github.io/2025/05/13/Note/Hire/Net/image.png">
-<meta property="article:published_time" content="2025-05-13T07:23:38.000Z">
-<meta property="article:modified_time" content="2025-06-28T13:01:51.317Z">
+<meta property="article:published_time" content="2025-12-18T16:07:46.000Z">
+<meta property="article:modified_time" content="2025-12-18T16:33:17.503Z">
 <meta property="article:author" content="Through Mountain">
-<meta property="article:tag" content="Net">
+<meta property="article:tag" content="Note">
+<meta property="article:tag" content="Go">
+<meta property="article:tag" content="Sync">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://mountainthrough.github.io/2025/05/13/Note/Hire/Net/image.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Net Note - 越过山丘</title>
+  <title>defer note - 越过山丘</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Net Note"></span>
+            <span id="subtitle" data-typed-text="defer note"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-05-13 15:23" pubdate>
-          2025年5月13日 下午
+        <time datetime="2025-12-19 00:07" pubdate>
+          2025年12月19日 凌晨
         </time>
       </span>
     
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          560 字
+          269 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          5 分钟
+          3 分钟
         
       </span>
     
@@ -275,32 +275,23 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Net Note</h1>
+            <h1 id="seo-header">defer note</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Http和Tcp区别"><a href="#Http和Tcp区别" class="headerlink" title="Http和Tcp区别"></a>Http和Tcp区别</h1><p>tcp是传输层，端到端协议，不加密，流式传输，传输无状态，连接有状态，三次握手四次挥手，数据单位是字节流，连接可靠</p>
-<p>http是应用层协议，数据单位是请求响应，基于tcp，无状态，就是说上一次发送的http连接对下一次发送得到的响应没有影响，http本身是无状态的，但是一些机制会让它看起来有状态</p>
-<h1 id="客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢"><a href="#客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢" class="headerlink" title="客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢"></a>客户端给服务器发3个tcp包，服务器可能收到几个，如果是udp呢</h1><p>tcp是0到无数个，无数个这种情况是某个包服务端没收到，然后触发客户端重传，但是服务端仍不返回ack,但是你要严格说客户端至始至终都发了三个包的话，那么服务端只能接收0到三个包，少于三个都是丢包的情况</p>
-<p>udp这种就是0到3个，因为没有重传机制</p>
-<h1 id="TCP协议如何保证可靠"><a href="#TCP协议如何保证可靠" class="headerlink" title="TCP协议如何保证可靠"></a>TCP协议如何保证可靠</h1><p>超时重传</p>
-<p>拥塞控制</p>
-<p>ack,seq</p>
-<p>三次握手四次挥手</p>
-<p>滑动窗口，允许一次接收的包个数</p>
-<h1 id="HTTP和TCP的keepalive有什么区别"><a href="#HTTP和TCP的keepalive有什么区别" class="headerlink" title="HTTP和TCP的keepalive有什么区别"></a>HTTP和TCP的keepalive有什么区别</h1><p>tcp的keepalive主要用于检测tcp连接是否断开</p>
-<p>http的keepalive代表要复用这个tcp连接</p>
-<p>两者可以共存</p>
-<h1 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h1><h2 id="TCP为什么开始发送速率比较低"><a href="#TCP为什么开始发送速率比较低" class="headerlink" title="TCP为什么开始发送速率比较低"></a>TCP为什么开始发送速率比较低</h2><p>因为开始的时候拥塞窗口较小，随着数据包的发送，拥塞窗口变大，发送速率变快</p>
-<h3 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h3><p>拥塞窗口指数增长，到达阈值就会进入拥塞避免状态</p>
-<h3 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h3><p>拥塞窗口线性增长</p>
-<h3 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h3><p>长时间没有收到ack，触发重传，进入慢启动</p>
-<h3 id="快恢复"><a href="#快恢复" class="headerlink" title="快恢复"></a>快恢复</h3><p>拥塞窗口变为当前一半，阈值变为当前+3，还是拥塞避免状态</p>
-<h3 id="快重传"><a href="#快重传" class="headerlink" title="快重传"></a>快重传</h3><p>收到超过三个ack就直接重传，不再等待超时，触发快恢复</p>
-<p><img src="/2025/05/13/Note/Hire/Net/image.png" srcset="/img/loading.gif" lazyload alt="image"></p>
-<h1 id="TCP释放连接中的2TSL的作用是什么"><a href="#TCP释放连接中的2TSL的作用是什么" class="headerlink" title="TCP释放连接中的2TSL的作用是什么"></a>TCP释放连接中的2TSL的作用是什么</h1><p>用来保证对方收到消息，如果没有收到消息，对面会发送fin,然后我方发送ack,避免对方一直处于last_ack状态</p>
-<p>tsl是一个tcp报文能存活的最长时间，通常为30s</p>
+                <p>今天我看defer的执行顺序有点让人迷惑<br>其实就是传参的问题，我想复杂了</p>
+<h2 id><a href="#" class="headerlink" title></a></h2><p>特性一<br><strong>defer的函数如果接收参数，那defer执行时就是用的传参时候的值</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">x := <span class="hljs-number">10</span><br><span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a <span class="hljs-type">int</span>)</span></span> &#123;<br>	fmt.Println(a)<br>&#125;(x)<br>x++<br></code></pre></td></tr></table></figure>
+<p><strong>没有接收参数的话，那么defer使用主函数的变量的值都是return语句后变量的值</strong></p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a></h2><p>特性二<br><strong>改变返回值</strong><br>go中的return语句并不是原子性操作，一般是分为两步:<br>将返回值赋值给一个变量<br>执行RET指令。<br>defer就执行在1之后，2之前。<br>所以defer能够改变<strong>返回值</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>(x <span class="hljs-type">int</span>)  &#123;<br>	 x = <span class="hljs-number">10</span><br>	 <span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>	 	x++<br>	 &#125;()<br>	 <span class="hljs-keyword">return</span> x<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>返回值就是11</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title></a></h2><p>特性三<br><strong>只defer最外层函数</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">addOne</span><span class="hljs-params">(x <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;addOne被调用，参数：&quot;</span>, x)<br>	<span class="hljs-keyword">return</span> x + <span class="hljs-number">1</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestDraft</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	a := <span class="hljs-number">5</span><br>	<span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;defer执行：&quot;</span>, addOne(a))<br>	a = <span class="hljs-number">10</span><br>	fmt.Println(<span class="hljs-string">&quot;主函数执行：&quot;</span>, a)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>执行结果是</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs txt">addOne被调用，参数： 5<br>主函数执行： 10<br>defer执行： 6<br></code></pre></td></tr></table></figure>
+<p>addOne函数被立即执行<br>println函数正常defer<br>defer会计算所有函数参数</p>
 
                 
               </div>
@@ -334,7 +325,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Net/" class="print-no-link">#Net</a>
+        <a href="/tags/Note/" class="print-no-link">#Note</a>
+      
+        <a href="/tags/Go/" class="print-no-link">#Go</a>
+      
+        <a href="/tags/Sync/" class="print-no-link">#Sync</a>
       
     </div>
   
@@ -346,8 +341,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Net Note</div>
-      <div>https://mountainthrough.github.io/2025/05/13/Note/Hire/Net/</div>
+      <div>defer note</div>
+      <div>https://mountainthrough.github.io/2025/12/19/Note/Go/Sync/defer/</div>
     </div>
     <div class="license-meta">
       
@@ -359,7 +354,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年5月13日</div>
+          <div>2025年12月19日</div>
         </div>
       
       
@@ -391,18 +386,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/12/19/Note/Go/Sync/defer/" title="defer note">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">defer note</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/09/Note/Hire/System/" title="System Note">
-                        <span class="hidden-mobile">System Note</span>
+                      <a href="/2025/05/13/Note/Hire/Net/" title="Net Note">
+                        <span class="hidden-mobile">Net Note</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
