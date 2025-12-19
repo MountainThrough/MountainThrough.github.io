@@ -4,6 +4,62 @@
   
   
   <entry>
+    <title>Vim Ref</title>
+    <link href="/2025/12/20/reference/Vim/"/>
+    <url>/2025/12/20/reference/Vim/</url>
+    
+    <content type="html"><![CDATA[<h1 id="替换命令"><a href="#替换命令" class="headerlink" title="替换命令"></a>替换命令</h1><p>全局替换</p><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs zsh">:%s/old/new/g<br></code></pre></td></tr></table></figure><h1 id="光标"><a href="#光标" class="headerlink" title="光标"></a>光标</h1><h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><table><thead><tr><th>快捷键</th><th>插入位置</th><th>场景说明</th></tr></thead><tbody><tr><td><code>i</code></td><td>光标<strong>当前字符的前方</strong>（左侧）</td><td>最常用的 “光标后输入”</td></tr><tr><td><code>a</code></td><td>光标<strong>当前字符的后方</strong>（右侧）</td><td>比如光标在 <code>w</code>（<code>world</code>）上，按 <code>a</code> 输入会插入到 <code>w</code> 前面</td></tr><tr><td><code>I</code></td><td>光标所在行的<strong>行首</strong></td><td>快速在行开头输入内容</td></tr><tr><td><code>A</code></td><td>光标所在行的<strong>行尾</strong></td><td>快速在行末尾输入内容（无需移动光标到行尾）</td></tr><tr><td><code>o</code></td><td>光标所在行的<strong>下方新建一行</strong></td><td>快速换行并在新行输入</td></tr><tr><td><code>O</code></td><td>光标所在行的<strong>上方新建一行</strong></td><td>快速在当前行上方插入新行输入</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>Reference</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Reference</tag>
+      
+      <tag>Vim</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Package和Module的特性</title>
+    <link href="/2025/12/19/Note/Go/Basic/package_moudle/"/>
+    <url>/2025/12/19/Note/Go/Basic/package_moudle/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天看一个项目，自己运行起来就报错<br>其实是我基础不牢，对于package和moudle不熟</p><h2 id="Package"><a href="#Package" class="headerlink" title="Package"></a>Package</h2><p>一个Package所在的文件夹的一级目录里不能存在别的Package的文件<br>只能允许文件夹里有别的Package</p><h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>Module跟Package一点关系都没有<br>只是展示引用的外部Package</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Go</tag>
+      
+      <tag>Package</tag>
+      
+      <tag>Module</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>defer note</title>
     <link href="/2025/12/19/Note/Go/Sync/defer/"/>
     <url>/2025/12/19/Note/Go/Sync/defer/</url>

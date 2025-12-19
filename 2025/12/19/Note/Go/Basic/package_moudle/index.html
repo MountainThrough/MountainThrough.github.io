@@ -19,26 +19,26 @@
   <meta name="author" content="Through Mountain">
   <meta name="keywords" content="">
   
-    <meta name="description" content="今天我看defer的执行顺序有点让人迷惑其实就是传参的问题，我想复杂了 特性一defer的函数如果接收参数，那defer执行时就是用的传参时候的值 12345x :&#x3D; 10defer func(a int) &#123;	fmt.Println(a)&#125;(x)x++ 没有接收参数的话，那么defer使用主函数的变量的值都是return语句后变量的值 特性二改变返回值go中的return语句">
+    <meta name="description" content="前言今天看一个项目，自己运行起来就报错其实是我基础不牢，对于package和moudle不熟 Package一个Package所在的文件夹的一级目录里不能存在别的Package的文件只能允许文件夹里有别的Package ModuleModule跟Package一点关系都没有只是展示引用的外部Package">
 <meta property="og:type" content="article">
-<meta property="og:title" content="defer note">
-<meta property="og:url" content="https://mountainthrough.github.io/2025/12/19/Note/Go/Sync/defer/index.html">
+<meta property="og:title" content="Package和Module的特性">
+<meta property="og:url" content="https://mountainthrough.github.io/2025/12/19/Note/Go/Basic/package_moudle/index.html">
 <meta property="og:site_name" content="越过山丘">
-<meta property="og:description" content="今天我看defer的执行顺序有点让人迷惑其实就是传参的问题，我想复杂了 特性一defer的函数如果接收参数，那defer执行时就是用的传参时候的值 12345x :&#x3D; 10defer func(a int) &#123;	fmt.Println(a)&#125;(x)x++ 没有接收参数的话，那么defer使用主函数的变量的值都是return语句后变量的值 特性二改变返回值go中的return语句">
+<meta property="og:description" content="前言今天看一个项目，自己运行起来就报错其实是我基础不牢，对于package和moudle不熟 Package一个Package所在的文件夹的一级目录里不能存在别的Package的文件只能允许文件夹里有别的Package ModuleModule跟Package一点关系都没有只是展示引用的外部Package">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-12-18T16:07:46.000Z">
-<meta property="article:modified_time" content="2025-12-18T16:33:17.503Z">
+<meta property="article:published_time" content="2025-12-19T15:29:52.000Z">
+<meta property="article:modified_time" content="2025-12-19T18:10:31.415Z">
 <meta property="article:author" content="Through Mountain">
-<meta property="article:tag" content="Note">
 <meta property="article:tag" content="Go">
-<meta property="article:tag" content="Sync">
+<meta property="article:tag" content="Package">
+<meta property="article:tag" content="Module">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>defer note - 越过山丘</title>
+  <title>Package和Module的特性 - 越过山丘</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="defer note"></span>
+            <span id="subtitle" data-typed-text="Package和Module的特性"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-12-19 00:07" pubdate>
-          2025年12月19日 凌晨
+        <time datetime="2025-12-19 23:29" pubdate>
+          2025年12月19日 晚上
         </time>
       </span>
     
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          269 字
+          83 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          3 分钟
+          1 分钟
         
       </span>
     
@@ -275,23 +275,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">defer note</h1>
+            <h1 id="seo-header">Package和Module的特性</h1>
             
             
               <div class="markdown-body">
                 
-                <p>今天我看defer的执行顺序有点让人迷惑<br>其实就是传参的问题，我想复杂了</p>
-<h2 id><a href="#" class="headerlink" title></a></h2><p>特性一<br><strong>defer的函数如果接收参数，那defer执行时就是用的传参时候的值</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">x := <span class="hljs-number">10</span><br><span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(a <span class="hljs-type">int</span>)</span></span> &#123;<br>	fmt.Println(a)<br>&#125;(x)<br>x++<br></code></pre></td></tr></table></figure>
-<p><strong>没有接收参数的话，那么defer使用主函数的变量的值都是return语句后变量的值</strong></p>
-<h2 id="-1"><a href="#-1" class="headerlink" title></a></h2><p>特性二<br><strong>改变返回值</strong><br>go中的return语句并不是原子性操作，一般是分为两步:<br>将返回值赋值给一个变量<br>执行RET指令。<br>defer就执行在1之后，2之前。<br>所以defer能够改变<strong>返回值</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>(x <span class="hljs-type">int</span>)  &#123;<br>	 x = <span class="hljs-number">10</span><br>	 <span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>	 	x++<br>	 &#125;()<br>	 <span class="hljs-keyword">return</span> x<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>返回值就是11</p>
-<h2 id="-2"><a href="#-2" class="headerlink" title></a></h2><p>特性三<br><strong>只defer最外层函数</strong></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">addOne</span><span class="hljs-params">(x <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;addOne被调用，参数：&quot;</span>, x)<br>	<span class="hljs-keyword">return</span> x + <span class="hljs-number">1</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestDraft</span><span class="hljs-params">(t *testing.T)</span></span> &#123;<br>	a := <span class="hljs-number">5</span><br>	<span class="hljs-keyword">defer</span> fmt.Println(<span class="hljs-string">&quot;defer执行：&quot;</span>, addOne(a))<br>	a = <span class="hljs-number">10</span><br>	fmt.Println(<span class="hljs-string">&quot;主函数执行：&quot;</span>, a)<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>执行结果是</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs txt">addOne被调用，参数： 5<br>主函数执行： 10<br>defer执行： 6<br></code></pre></td></tr></table></figure>
-<p>addOne函数被立即执行<br>println函数正常defer<br>defer会计算所有函数参数</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天看一个项目，自己运行起来就报错<br>其实是我基础不牢，对于package和moudle不熟</p>
+<h2 id="Package"><a href="#Package" class="headerlink" title="Package"></a>Package</h2><p>一个Package所在的文件夹的一级目录里不能存在别的Package的文件<br>只能允许文件夹里有别的Package</p>
+<h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>Module跟Package一点关系都没有<br>只是展示引用的外部Package</p>
 
                 
               </div>
@@ -325,11 +316,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Note/" class="print-no-link">#Note</a>
-      
         <a href="/tags/Go/" class="print-no-link">#Go</a>
       
-        <a href="/tags/Sync/" class="print-no-link">#Sync</a>
+        <a href="/tags/Package/" class="print-no-link">#Package</a>
+      
+        <a href="/tags/Module/" class="print-no-link">#Module</a>
       
     </div>
   
@@ -341,8 +332,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>defer note</div>
-      <div>https://mountainthrough.github.io/2025/12/19/Note/Go/Sync/defer/</div>
+      <div>Package和Module的特性</div>
+      <div>https://mountainthrough.github.io/2025/12/19/Note/Go/Basic/package_moudle/</div>
     </div>
     <div class="license-meta">
       
@@ -386,9 +377,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/12/19/Note/Go/Basic/package_moudle/" title="Package和Module的特性">
+                      <a href="/2025/12/20/reference/Vim/" title="Vim Ref">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Package和Module的特性</span>
+                        <span class="hidden-mobile">Vim Ref</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -396,8 +387,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/13/Note/Hire/Net/" title="Net Note">
-                        <span class="hidden-mobile">Net Note</span>
+                      <a href="/2025/12/19/Note/Go/Sync/defer/" title="defer note">
+                        <span class="hidden-mobile">defer note</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
